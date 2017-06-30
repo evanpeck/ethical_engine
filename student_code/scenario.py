@@ -111,9 +111,9 @@ class Scenario():
         readable += '\n'
 
         if self.legalCrossing:
-            readable += 'Crossing is legal'
+            readable += 'Crossing is legal\n'
         else:
-            readable += 'Crossing is illegal'
+            readable += 'Crossing is illegal\n'
 
         if self.pedsInLane:
             readable += 'Pedestrians are in your lane.'
