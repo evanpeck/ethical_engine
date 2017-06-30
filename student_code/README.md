@@ -12,6 +12,8 @@ To see it in action, simply run `main.py`:
 - `obf_engine.py` _(Part 2 only! - see below)_ is an obfuscated version of `engine.py`. These files will be generated for students so that they can use statistical sampling to detect biases of code that they cannot read.
 - `auditor.py` _(Part 2 only!)_ the code that students will write to statistically sample the biases of an obfuscated engine.py
 
+**Note to Instructors:** if you would like to see a potential solution, we have a more polished `engine.py` and `auditor.py` available upon request. Email me at `evan.peck@bucknell.edu`
+
 
 ### Part 2: Auditing the Ethical Engine
 Part 2 depends on students reverse engineering another student's code... essentially treating it as a proprietary algorithm. To replicate this experience, we will obfuscate python code before passing it along.
