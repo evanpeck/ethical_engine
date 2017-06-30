@@ -1,7 +1,7 @@
-from obf_engine import *
-from scenario import *
+from engine import decide
+from scenario import Scenario
 
-def runSimulation(machine = False):
+def runSimulation():
     ''' Temporarily putting a main function here to cycle through scenarios'''
 
     print("===========================================")
