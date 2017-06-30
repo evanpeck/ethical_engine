@@ -1,25 +1,22 @@
 import random
 
 class Scenario():
-    """ Packages all of the information needed to create a moral scenario.
+    """ Packages all of the information needed to create an ethical scenario.
 
-    The Scenario class will automatically construct a random scenario in
-    which an autonomous car must decide whether to save the passengers
-    in the car or the pedestrians in the crosswalk.
+    Automatically construct a random scenario in which an autonomous car must
+    decide whether to save the car passengers or the pedestrians.
 
     Args:
-        sameNum (bool, optional): if True, this enforces that the number of
+        sameNum (bool, optional): if True, enforces that the number of
             pedestrations is the same as the number of car passengers.
-            This is useful later on reverse engineering the code.
 
     Attributes:
         numPedestrians (int): the number of pedestrians in the crosswalk
         numPassengers (int): the number of passengers in the car
         passengers (list): list of passengers (Person objects) in the car
         pedestrians (list): list of pedestrians (Person objects) in the crosswalk
-        you (bool): True if you are one of the passengers in the car
-        crosswalk (str): 'illegal' or 'legal' corresponds to whether the
-            walk signal is on or not
+        youInCar (bool): True if you are one of the passengers in the car
+        legalCrossing (bool): True if pedestrians are legally crossing
         pedsInLane (bool): True if car is currently in the same lane as
             the pedestrians (would need to switch lanes to avoid them)
     """
@@ -137,7 +134,8 @@ class Person():
         profession (string): adults are assigned a profession: 'doctor', 'CEO',
             'criminal', 'homeless', 'unemployed', 'unknown'
         gender (string): 'male' or 'female' TODO: add more diverse options
-        bodyType (string): adults are classified as 'average', 'athletic', or 'overweight'
+        bodyType (string): adults are classified as 'average', 'athletic',
+            or 'overweight'
         pregnant (bool): adult women may also be pregnant. True if pregant.
 
     """
