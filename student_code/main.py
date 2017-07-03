@@ -11,7 +11,7 @@ def runSimulation():
 
     keepRunning = True
     while keepRunning:
-        scene = Scenario(sameNum = False)
+        scene = Scenario()
         print(scene)
         print()
         result = decide(scene)

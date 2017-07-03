@@ -7,16 +7,13 @@ from scenario import Scenario
 def decide(scenario):
     """ Decides whether your car will save the passengers or pedestrians
 
-    This method is typically called from a DIFFERENT python file. Given
-    any scenario
-
     Args:
-        scenario: a scenario object from scenario.py. This object contains
+        scenario: a Scenario object defined in scenario.py. This object contains
             all of the information about the scenario. You can see some
             examples below in the sample code.
 
     Returns:
-        A string which indicates whether you are saving "passengers" or
+        A string indicating whether you are saving "passengers" or
         "pedestrians". Note that your method MUST make a decision for
         ANY potential scenario.
     """
