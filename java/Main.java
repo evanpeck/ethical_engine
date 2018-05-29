@@ -15,7 +15,7 @@ public class Main {
         Scenario.setSeed(seed);
         Scanner scanner = new Scanner(System.in);
         while (true) {
-            Scenario scene = new Scenario();
+            Scenario scene = Scenario.getRandomScenario();
             System.out.println(scene);
             Decision result = engine.decide(scene);
             System.out.print("Hit any key to see decision: ");
