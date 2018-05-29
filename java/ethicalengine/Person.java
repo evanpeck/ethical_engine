@@ -56,6 +56,33 @@ public class Person {
         this.isYou = isYou;
     }
     
+    @Override
+    public String toString() {
+        String readable = this.charType;
+        if (this.charType.equals("human")) {
+            readable = "[";
+            if (this.bodyType != null) {
+                readable += this.bodyType + " ";
+            }
+            if (this.age != null) {
+                readable += this.age;
+            }
+            if (this.gender != null) {
+                readable += " " + this.gender + "]";
+            }
+            if (this.profession != null) {
+                readable += " job: " + this.profession;
+            }
+            if (this.isPregnant) {
+                readable += ", pregnant";
+            }
+        }
+        if (this.isYou()) {
+            readable = "YOU " + readable;
+        }
+        return readable;
+    }
+    
     // Generate people
     
     public static String[] CHAR_TYPES = {"human", "human", "human", "animal", "human"};

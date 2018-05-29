@@ -38,6 +38,23 @@ public class Scenario {
         return this.pedestrians;
     }
     
+    @Override
+    public String toString() {
+        String readable = "Scenario Overview";
+        readable += "\n-----------------";
+        readable += "\nPeds in Lane: " + (this.pedsInLane ? "Yes" : "No");
+        readable += "\nLegal Crossing: " + (this.legalCrossing ? "Yes" : "No");
+        readable += String.format("\nPassengers (%d)", this.passengers.length);
+        for (Person p : this.passengers) {
+            readable += "\n- " + p;
+        }
+        readable += String.format("\nPedestrians (%d)", this.pedestrians.length);
+        for (Person p : this.pedestrians) {
+            readable += "\n- " + p;
+        }
+        return readable;
+    }
+    
     // Generate scenarios
     
     private static Random random = new Random();
