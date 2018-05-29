@@ -11,7 +11,10 @@ public class Scenario {
     
     public static boolean[] YOU_CHANGE = {true, false, false, false};
     public static boolean[] LEGAL_CROSSING_CHANCE = {true, true, false};
-    public static boolean PEDS_IN_LANE_CHANCE = {true, false};
+    public static boolean[] PEDS_IN_LANE_CHANCE = {true, false};
+    
+    public Person[] passengers = {};
+    public Person[] pedestrians = {};
     
     public Scenario() {
         // numPedestrians = randomIntBetween(MIN_PEDESTRIANS, MAX_PEDESTRIANS);

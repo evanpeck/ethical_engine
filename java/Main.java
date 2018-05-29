@@ -11,18 +11,19 @@ public class Main {
     }
     
     public static void runSimulation(int seed) {
+        Engine engine = new Engine();
         Scenario.setSeed(seed);
         Scanner scanner = new Scanner(System.in);
-        while (scanner.hasNext()) {
+        while (true) {
             Scenario scene = new Scenario();
             System.out.println(scene);
-            String result = decide(scene);
+            Decision result = engine.decide(scene);
             System.out.print("Hit any key to see decision: ");
             scanner.nextLine();
             System.out.println("I chose to save the " + result);
             System.out.print("Hit 'q' to quit or 'enter' to continue: ");
             String response = scanner.nextLine();
-            if (response.toLowerCase().equals('q')) {
+            if (response.equals("q")) {
                 break;
             }
         }
