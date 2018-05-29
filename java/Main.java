@@ -1,3 +1,4 @@
+import ethicalengine.*;
 import java.util.Scanner;
 
 public class Main {
@@ -11,7 +12,7 @@ public class Main {
     }
     
     public static void runSimulation(int seed) {
-        Engine engine = new Engine();
+        Engine engine = new EthicalEngine();
         Scenario.setSeed(seed);
         Scanner scanner = new Scanner(System.in);
         while (true) {

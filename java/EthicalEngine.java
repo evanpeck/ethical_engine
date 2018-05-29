@@ -1,5 +1,7 @@
-public class Engine {
-    
+import ethicalengine.*;
+
+public class EthicalEngine extends Engine {
+
     public Decision decide(Scenario scenario) {
         int numPassengers = scenario.getPassengers().length;
         int numPedestrians = scenario.getPedestrians().length;
@@ -9,5 +11,5 @@ public class Engine {
             return Decision.PEDESTRIANS;
         }
     }
-    
+
 }

@@ -1,3 +1,5 @@
+package ethicalengine;
+
 public enum Decision {
     
     PASSENGERS,

@@ -1,3 +1,5 @@
+package ethicalengine;
+
 public class Person {
     
     // Person model
@@ -22,13 +24,35 @@ public class Person {
         this.isYou = isYou;
     }
     
-    // TODO: Add getters and setters
+    public String getCharacterType() {
+        return this.charType;
+    }
+    
+    public String getProfession() {
+        return this.profession;
+    }
+    
+    public String getAgeGroup() {
+        return this.age;
+    }
+    
+    public String getGender() {
+        return this.gender;
+    }
+    
+    public String getBodyType() {
+        return this.bodyType;
+    }
+    
+    public boolean isPregnant() {
+        return this.isPregnant;
+    }
     
     public boolean isYou() {
         return this.isYou;
     }
     
-    public void setAsYou(boolean isYou) {
+    protected void setAsYou(boolean isYou) {
         this.isYou = isYou;
     }
     
