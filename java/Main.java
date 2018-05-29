@@ -1,6 +1,9 @@
 import ethicalengine.*;
 import java.util.Scanner;
 
+/**
+ * Driver class for the ethical engine activity
+ */
 public class Main {
     
     public static void main(String[] args) {

@@ -19,9 +19,7 @@ public class Scenario {
         this.pedsInLane = pedsInLane;
     }
     
-    // TODO: Add getters and setters
-    
-    public boolean youAreInCar() {
+    public boolean hasYouInCar() {
         for (Person person : this.passengers) {
             if (person.isYou()) {
                 return true;
@@ -36,6 +34,14 @@ public class Scenario {
     
     public Person[] getPedestrians() {
         return this.pedestrians;
+    }
+    
+    public boolean isLegalCrossing() {
+        return this.legalCrossing;
+    }
+    
+    public boolean hasPedestriansInLane() {
+        return this.pedsInLane;
     }
     
     @Override
