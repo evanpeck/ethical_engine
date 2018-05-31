@@ -13,7 +13,7 @@ Fill in the `decide` method with a program that analyzes the given scenario and 
 | scenario.youInCar | Check if you are in the car | boolean |
 | scenario.legalCrossing | Check if the pedestrians are crossing the street legally | boolean |
 | scenario.pedsInLane | Check if the pedestrians are in the crossing lane | boolean |
-s
+
 ## Accessing Person Objects
 
 You can loop over all of the passengers (or pedestrians) like so:
