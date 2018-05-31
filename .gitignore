@@ -1,2 +1,6 @@
-student_code/__pycache__
+python/student_code/__pycache__
 *.pyc
+# Ignore all .class files except for obfuscated engines
+java/ethicalengine/*.class
+java/Main.class
+java/EthicalEngine.class
