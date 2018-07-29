@@ -27,14 +27,14 @@ class Helper {
             srand(seed);
         }
         
-        static bool randomBoolean(vector<bool> array) {
-            int index = (rand() % array.size()) - 1;
-            return array[index];
+        static bool randomBoolean(vector<bool> boolValues) {
+            int index = (rand() % boolValues.size()) - 1;
+            return boolValues[index];
         }
         
-        static string randomString(vector<string> array) {
-            int index = (rand() % array.size()) - 1;
-            return array[index];
+        static string randomString(vector<string> stringValues) {
+            int index = (rand() % stringValues.size()) - 1;
+            return stringValues[index];
         }
         
         static int randomIntBetween(int min, int max) {
@@ -70,7 +70,33 @@ class Person {
         }
 
         Person() {
-
+            string charType = Helper::randomString(CHAR_TYPES);
+            string profession = "";
+            string age = "";
+            string gender = "";
+            string bodyType = "";
+            bool isPregnant = false;
+            bool isYou = false;
+            if (charType == "animal") {
+                charType = Helper::randomString(ANIMAL_TYPES);
+            } else {
+                age = Helper::randomString(AGE_TYPES);
+                gender = Helper::randomString(GENDER_TYPES);
+                if (age == "adult") {
+                    bodyType = Helper::randomString(BODYWEIGHT_CHANCE);
+                    if (gender == "female") {
+                        isPregnant = Helper::randomBoolean(PREGNANT_CHANCE);
+                    }
+                    profession = Helper::randomString(PROF_TYPES);
+                }
+            }
+            this->charType = charType;
+            this->profession = profession;
+            this->age = age; 
+            this->gender = gender;
+            this->bodyType = bodyType;
+            this->personIsPregnant = isPregnant;
+            this->personIsYou = isYou;
         }
     
         string getCharacterType() {
@@ -140,32 +166,57 @@ class Person {
 
         // TODO: Allow more control over how random people are generated
         
-        Person getRandomPerson() {
-            string charType = Helper::randomString(CHAR_TYPES);
-            string profession = "";
-            string age = "";
-            string gender = "";
-            string bodyType = "";
-            bool isPregnant = false;
-            bool isYou = false;
-            if (charType == "animal") {
-                charType = Helper::randomString(ANIMAL_TYPES);
-            } else {
-                age = Helper::randomString(AGE_TYPES);
-                gender = Helper::randomString(GENDER_TYPES);
-                if (age == "adult") {
-                    bodyType = Helper::randomString(BODYWEIGHT_CHANCE);
-                    if (gender == "female") {
-                        isPregnant = Helper::randomBoolean(PREGNANT_CHANCE);
-                    }
-                    profession = Helper::randomString(PROF_TYPES);
-                }
-            }
-            Person person(charType, profession, age, gender, bodyType, isPregnant, isYou);
-            return person;
-        }
+        // Person getRandomPerson() {
+        //     string charType = Helper::randomString(CHAR_TYPES);
+        //     string profession = "";
+        //     string age = "";
+        //     string gender = "";
+        //     string bodyType = "";
+        //     bool isPregnant = false;
+        //     bool isYou = false;
+        //     if (charType == "animal") {
+        //         charType = Helper::randomString(ANIMAL_TYPES);
+        //     } else {
+        //         age = Helper::randomString(AGE_TYPES);
+        //         gender = Helper::randomString(GENDER_TYPES);
+        //         if (age == "adult") {
+        //             bodyType = Helper::randomString(BODYWEIGHT_CHANCE);
+        //             if (gender == "female") {
+        //                 isPregnant = Helper::randomBoolean(PREGNANT_CHANCE);
+        //             }
+        //             profession = Helper::randomString(PROF_TYPES);
+        //         }
+        //     }
+        //     Person person(charType, profession, age, gender, bodyType, isPregnant, isYou);
+        //     return person;
+        // }
     
 };
+
+// Person getRandomPerson() {
+//     // string charType = Helper::randomString(CHAR_TYPES);
+//     // string profession = "";
+//     // string age = "";
+//     // string gender = "";
+//     // string bodyType = "";
+//     // bool isPregnant = false;
+//     // bool isYou = false;
+//     // if (charType == "animal") {
+//     //     charType = Helper::randomString(ANIMAL_TYPES);
+//     // } else {
+//     //     age = Helper::randomString(AGE_TYPES);
+//     //     gender = Helper::randomString(GENDER_TYPES);
+//     //     if (age == "adult") {
+//     //         bodyType = Helper::randomString(BODYWEIGHT_CHANCE);
+//     //         if (gender == "female") {
+//     //             isPregnant = Helper::randomBoolean(PREGNANT_CHANCE);
+//     //         }
+//     //         profession = Helper::randomString(PROF_TYPES);
+//     //     }
+//     // }
+//     // Person *person = Person(charType, profession, age, gender, bodyType, isPregnant, isYou);
+//     // return person;
+// }
 
 class Scenario {
     
@@ -183,10 +234,6 @@ class Scenario {
             this->pedestrians = pedestrians;
             this->legalCrossing = legalCrossing;
             this->pedsInLane = pedsInLane;
-        }
-
-        Scenario() {
-
         }
         
         bool hasYouInCar() {
@@ -242,44 +289,83 @@ class Scenario {
         
         // TODO: Allow more control over how random scenarios are generated
         
-        Scenario getRandomScenario() {
-            int numPedestrians = Helper::randomIntBetween(MIN_PEDESTRIANS, MAX_PEDESTRIANS);
-            int numPassengers;
-            // Check if scenario should have same number of passengers as pedestrians
-            bool sameNum = Helper::randomBoolean(SAME_NUM_CHANCE);
-            if (!sameNum) {
-                numPassengers = Helper::randomIntBetween(MIN_PASSENGERS, MAX_PASSENGERS);
-            } else {
-                numPassengers = numPedestrians;
-            }
-            // Generate passengers
-            vector<Person> passengers = getRandomPersonArray(numPassengers);
-            // Determine if you are in the car
-            bool youInCar = Helper::randomBoolean(YOU_CHANCE);
-            if (youInCar) {
-                // If you are in the car, set a passenger to be you
-                int randomIndex = (rand() % numPassengers) - 1;
-                passengers[randomIndex].setAsYou(true);
-            }
-            // Generate pedestrians
-            vector<Person> pedestrians = getRandomPersonArray(numPedestrians);
-            // Determine other scenario settings
-            bool legalCrossing = Helper::randomBoolean(LEGAL_CROSSING_CHANCE);
-            bool pedsInLane = Helper::randomBoolean(PEDS_IN_LANE_CHANCE);
-            Scenario scenario(passengers, pedestrians, legalCrossing, pedsInLane);
-            return scenario;       
-        }
+        // Scenario getRandomScenario() {
+        //     int numPedestrians = Helper::randomIntBetween(MIN_PEDESTRIANS, MAX_PEDESTRIANS);
+        //     int numPassengers;
+        //     // Check if scenario should have same number of passengers as pedestrians
+        //     bool sameNum = Helper::randomBoolean(SAME_NUM_CHANCE);
+        //     if (!sameNum) {
+        //         numPassengers = Helper::randomIntBetween(MIN_PASSENGERS, MAX_PASSENGERS);
+        //     } else {
+        //         numPassengers = numPedestrians;
+        //     }
+        //     // Generate passengers
+        //     vector<Person> passengers = getRandomPersonArray(numPassengers);
+        //     // Determine if you are in the car
+        //     bool youInCar = Helper::randomBoolean(YOU_CHANCE);
+        //     if (youInCar) {
+        //         // If you are in the car, set a passenger to be you
+        //         int randomIndex = (rand() % numPassengers) - 1;
+        //         passengers[randomIndex].setAsYou(true);
+        //     }
+        //     // Generate pedestrians
+        //     vector<Person> pedestrians = getRandomPersonArray(numPedestrians);
+        //     // Determine other scenario settings
+        //     bool legalCrossing = Helper::randomBoolean(LEGAL_CROSSING_CHANCE);
+        //     bool pedsInLane = Helper::randomBoolean(PEDS_IN_LANE_CHANCE);
+        //     Scenario scenario(passengers, pedestrians, legalCrossing, pedsInLane);
+        //     return scenario;       
+        // }
         
-        vector<Person> getRandomPersonArray(int num) {
-            Person *p = new Person();
-            vector<Person> array(num);
-            for (int i = 0; i < num; i++) {
-                array[i] = p->getRandomPerson();
-            }
-            return array;
-        }
+        // vector<Person> getRandomPersonArray(int num) {
+        //     // Person *p = new Person();
+        //     vector<Person> persons(num);
+        //     for (int i = 0; i < num; i++) {
+        //         persons[i] = getRandomPerson();
+        //     }
+        //     return persons;
+        // }
     
 };
+
+vector<Person> getRandomPersonArray(int num) {
+    // Person *p = new Person();
+    vector<Person> persons(num);
+    for (int i = 0; i < num; i++) {
+        // persons[i] = getRandomPerson();
+        Person *person = new Person();
+        persons[i] = *person;
+    }
+    return persons;
+}
+
+Scenario getRandomScenario() {
+    int numPedestrians = Helper::randomIntBetween(MIN_PEDESTRIANS, MAX_PEDESTRIANS);
+    int numPassengers;
+    // Check if scenario should have same number of passengers as pedestrians
+    bool sameNum = Helper::randomBoolean(SAME_NUM_CHANCE);
+    if (!sameNum) {
+        numPassengers = Helper::randomIntBetween(MIN_PASSENGERS, MAX_PASSENGERS);
+    } else {
+        numPassengers = numPedestrians;
+    }
+    // Generate passengers
+    vector<Person> passengers = getRandomPersonArray(numPassengers);
+    // Determine if you are in the car
+    bool youInCar = Helper::randomBoolean(YOU_CHANCE);
+    if (youInCar) {
+        // If you are in the car, set a passenger to be you
+        int randomIndex = (rand() % numPassengers) - 1;
+        passengers[randomIndex].setAsYou(true);
+    }
+    // Generate pedestrians
+    vector<Person> pedestrians = getRandomPersonArray(numPedestrians);
+    // Determine other scenario settings
+    bool legalCrossing = Helper::randomBoolean(LEGAL_CROSSING_CHANCE);
+    bool pedsInLane = Helper::randomBoolean(PEDS_IN_LANE_CHANCE);
+    Scenario scenario(passengers, pedestrians, legalCrossing, pedsInLane);
+    return scenario;       
+}
 
 enum Decision {PASSENGERS, PEDESTRIANS};
 
@@ -301,9 +387,8 @@ Decision decide(Scenario scenario) {
 
 void runSimulation(int seed) {
     Helper::setSeed(seed);
-    Scenario *s = new Scenario();
     while (true) {
-        Scenario scene = s->getRandomScenario();
+        Scenario scene = getRandomScenario();
         cout << scene.toString() << endl;
         Decision result = decide(scene);
         cout << "Hit any key to see decision: " << endl;
@@ -321,9 +406,9 @@ void runSimulation(int seed) {
 
 int main(int argc, char** argv) {
     int seed = 42;
-    if (argc >= 1) {
-        seed = stoi(argv[1]);
-    }
+    // if (argc >= 1) {
+    //     seed = stoi(argv[1]);
+    // }
     runSimulation(seed);
     return 0;
 }
