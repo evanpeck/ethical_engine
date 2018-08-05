@@ -112,17 +112,30 @@ string personToString(Person p) {
     return readable;
 }
 
-string showScenarioOverview(Person passenger, Person pedestrian, bool pedsInLane, bool legalCrossing) {
+Scenario::Scenario(vector<Person> passengers, vector<Person> pedestrians,
+                   bool pedsInLane, bool legalCrossing, bool youInCar) {
+    this->passengers = passengers;
+    this->pedestrians = pedestrians;
+    this->pedsInLane = pedsInLane;
+    this->legalCrossing = legalCrossing;
+    this->youInCar = youInCar;
+}
+
+string showScenarioOverview(Scenario scenario) {
     string readable = "Scenario Overview";
     readable += "\n-----------------";
     readable += "\nPeds in Lane: ";
-    readable += (pedsInLane ? "Yes" : "No");
+    readable += (scenario.pedsInLane ? "Yes" : "No");
     readable += "\nLegal Crossing: ";
-    readable += (legalCrossing ? "Yes" : "No");
-    readable += "\nPassengers (1)\n";
-    readable += "- " + personToString(passenger);
-    readable += "\nPedestrians (1)\n";
-    readable += "- " + personToString(pedestrian);
+    readable += (scenario.legalCrossing ? "Yes" : "No");
+    readable += "\nPassengers (1)";
+    for (Person p : scenario.passengers) {
+        readable += "\n- " + personToString(p);
+    }
+    readable += "\nPedestrians (1)";
+    for (Person p : scenario.pedestrians) {
+        readable += "\n- " + personToString(p);
+    }
     return readable;
 }
 
@@ -142,11 +155,12 @@ void runSimulation(int seed) {
         Person pedestrian = getRandomPerson(false, false);
         bool pedsInLane = getRandomBool(PEDS_IN_LANE_CHANCE);
         bool legalCrossing = getRandomBool(LEGAL_CROSSING_CHANCE);
-        string scenario = showScenarioOverview(passenger, pedestrian, pedsInLane, legalCrossing);
+        Scenario scenario({passenger}, {pedestrian}, pedsInLane, legalCrossing, youInCar);
+        string details = showScenarioOverview(scenario);
         // showPersonAttributes(passenger);
         // showPersonAttributes(pedestrian);
-        cout << scenario << endl;
-        string result = decide(passenger, pedestrian, pedsInLane, legalCrossing);
+        cout << details << endl;
+        string result = decide(scenario);
         cout << "Hit any key to see decision: " << endl;
         string line;
         getline(cin, line);

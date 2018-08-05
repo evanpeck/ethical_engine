@@ -9,16 +9,15 @@ int main(int argc, char** argv) {
 }
 
 /**
- * Decides whether to save the passenger or the pedestrian
- * @param passenger: the passenger in the car
- * @param pedestrian: the pedestrian near the car
- * @param pedsInLane: whether or not the pedestrian is in the crossing lane
- * @param legalCrossing: whether or not the pedestrian is crossing legally
- * @return string: either "passenger" or "pedestrian" depending on which group to save
+ * Decides whether to save the passengers or the pedestrians
+ * @param Scenario scenario: the ethical dilemma
+ * @return string: either "passengers" or "pedestrians" depending on which group to save
  */
-string decide(Person passenger, Person pedestrian, bool pedsInLane, bool legalCrossing) {
+string decide(Scenario scenario) {
+    Person passenger = scenario.passengers[0];
+    Person pedestrian = scenario.pedestrians[0];
     if (passenger.isPregnant) {
-        return "passenger";
+        return "passengers";
     }
-    return "pedestrian";
+    return "pedestrians";
 }

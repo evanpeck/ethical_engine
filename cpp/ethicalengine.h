@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 using namespace std;
 
 class Person {
@@ -17,6 +18,19 @@ class Person {
 
 };
 
-string decide(Person passenger, Person pedestrian, bool pedsInLane, bool legalCrossing);
+class Scenario {
+    
+    public:
+        vector<Person> passengers;
+        vector<Person> pedestrians;
+        bool pedsInLane;
+        bool legalCrossing;
+        bool youInCar;
+
+        Scenario(vector<Person> passengers, vector<Person> pedestrians,
+                 bool pedsInLane, bool legalCrossing, bool youInCar);
+};
+
+string decide(Scenario scenario);
 int getSeed(int argc, char** argv);
 void runSimulation(int seed);
