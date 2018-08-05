@@ -59,15 +59,44 @@ Person getRandomPerson(bool mustBeHuman, bool isYou) {
 }
 
 Person::Person(string charType, string ageGroup, string gender, string bodyType,
-               string profession, bool isPregnant, bool isYou) {
+               string profession, bool personIsPregnant, bool personIsYou) {
     this->charType = charType;
     this->ageGroup = ageGroup;
     this->gender = gender;
     this->bodyType = bodyType;
     this->profession = profession;
-    this->isPregnant = isPregnant;
-    this->isYou = isYou;
+    this->personIsPregnant = personIsPregnant;
+    this->personIsYou = personIsYou;
 }
+
+string Person::getCharacterType() {
+    return this->charType;
+}
+
+string Person::getAgeGroup() {
+    return this->ageGroup;
+}
+
+string Person::getGender() {
+    return this->gender;
+}
+
+string Person::getBodyType() {
+    return this->bodyType;
+}
+
+string Person::getProfession() {
+    return this->profession;
+}
+
+bool Person::isPregnant() {
+    return this->personIsPregnant;
+}
+
+bool Person::isYou() {
+    return this->personIsYou;
+}
+
 
 void showPersonAttributes(Person person) {
     cout << "\n" << endl;
@@ -76,8 +105,8 @@ void showPersonAttributes(Person person) {
     cout << "gender = " << person.gender << endl;
     cout << "bodyType = " << person.bodyType << endl;
     cout << "profession = " << person.profession << endl;
-    cout << "isPregnant = " << person.isPregnant << endl;
-    cout << "isYou = " << person.isYou << endl;
+    cout << "isPregnant = " << person.personIsPregnant << endl;
+    cout << "isYou = " << person.personIsYou << endl;
     cout << "\n" << endl;
 }
 
@@ -101,11 +130,11 @@ string personToString(Person p) {
             readable += " job: ";
             readable += p.profession;
         }
-        if (p.isPregnant) {
+        if (p.personIsPregnant) {
             readable += ", pregnant";
         }
     }
-    if (p.isYou) {
+    if (p.personIsYou) {
         string info = readable;
         readable = "YOU " + info;
     }
@@ -120,6 +149,27 @@ Scenario::Scenario(vector<Person> passengers, vector<Person> pedestrians,
     this->legalCrossing = legalCrossing;
     this->youInCar = youInCar;
 }
+
+vector<Person> Scenario::getPassengers() {
+    return this->passengers;
+}
+
+vector<Person> Scenario::getPedestrians() {
+    return this->pedestrians;
+}
+
+bool Scenario::hasPedestriansInLane() {
+    return this->pedsInLane;
+}
+
+bool Scenario::isLegalCrossing() {
+    return this->legalCrossing;
+}
+
+bool Scenario::hasYouInCar() {
+    return this->youInCar;
+}
+
 
 string showScenarioOverview(Scenario scenario) {
     string readable = "Scenario Overview";

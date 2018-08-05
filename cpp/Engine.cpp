@@ -14,9 +14,9 @@ int main(int argc, char** argv) {
  * @return string: either "passengers" or "pedestrians" depending on which group to save
  */
 string decide(Scenario scenario) {
-    Person passenger = scenario.passengers[0];
-    Person pedestrian = scenario.pedestrians[0];
-    if (passenger.isPregnant) {
+    Person passenger = scenario.getPassengers()[0];
+    Person pedestrian = scenario.getPedestrians()[0];
+    if (passenger.isPregnant()) {
         return "passengers";
     }
     return "pedestrians";

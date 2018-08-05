@@ -4,3 +4,4 @@ Choose the language you want to use and read about how you can implement your ow
 
 - [Python Documentation](python.md)
 - [Java Documentation](java.md)
+- [C++ Documentation](cpp.md)
