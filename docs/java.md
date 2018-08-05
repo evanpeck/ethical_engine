@@ -44,7 +44,7 @@ if (pedestrians.length >= 1) {
 | getCharacterType() | What kind of character they are | String: "human", "cat", or "dog" |
 | getAgeGroup() | If human, their age group | String: "baby", "child", "adult", "elderly" |
 | getGender() | If human, their gender | String: "male", "female" |
-| getBodyType() | If human adult, their body type | String: "overweight", "athletic", "average", "average" |
+| getBodyType() | If human adult, their body type | String: "overweight", "athletic", "average" |
 | getProfession() | If human adult, their job | String: "doctor", "CEO", "criminal", "homeless", "unemployed", "unknown" |
 | isPregnant() | If human female, whether or not they are pregnant | boolean |
 | isYou() | Whether or not they are you | boolean |
