@@ -43,4 +43,4 @@ Each time you run the program with the value 12, you will see the same series of
 
 Open `Engine.cpp` and start editing the `decide()` method.
 
-You can refer to [the documentation]() to see what information each scenario object contains.
+You can refer to [the documentation](https://evanpeck.github.io/ethical_engine/cpp) to see what information each scenario object contains.
