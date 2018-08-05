@@ -5,7 +5,7 @@
 Compile and run the Main class to simulate your engine with random scenarios:
 
 ```
-$ g++ Engine.cpp EthicalWorld.cpp
+$ g++ -std=c++14 Engine.cpp World.cpp
 $ ./a.out
 ```
 
@@ -33,7 +33,7 @@ Done.
 Scenarios are generated randomly. You can also generate pseudo-random scenarios, where the same scenarios are run each time the program runs. Specify a seed for the random generator as a runtime argument like so:
 
 ```
-$ g++ Engine.cpp EthicalWorld.cpp
+$ g++ -std=c++14 Engine.cpp World.cpp
 $ ./a.out 12
 ```
 
