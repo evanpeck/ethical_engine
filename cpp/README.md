@@ -2,7 +2,7 @@
 
 ## Running the Program
 
-Compile and run the Main class to simulate your engine with random scenarios:
+Compile and run the program files to simulate your engine with random scenarios:
 
 ```
 $ g++ -std=c++14 Engine.cpp World.cpp
