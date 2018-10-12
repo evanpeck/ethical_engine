@@ -39,5 +39,5 @@ if len(scenario.pedestrians) >= 1:
 | person.age | If human, check their age group | string: "baby", "child", "adult", "elderly" |
 | person.gender | If human, check their gender | string: "male", "female" |
 | person.profession | If human adult, check their profession | string: "doctor", "CEO", "criminal", "homeless", "unemployed", "unknown" |
-| person.bodyType | If human adult, check their body type | string: "overweight", "athletic", "average", "average" |
+| person.bodyType | If human adult, check their body type | string: "overweight", "athletic", "average" |
 | person.pregnant | If human female, check if they are pregnant | boolean |

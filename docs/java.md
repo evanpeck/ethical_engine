@@ -6,13 +6,13 @@ Fill in the `decide` method with a program that analyzes the given scenario and 
 
 ## Scenario Information
 
-| Method | Details | Type |
+| Method | Returns | Type |
 |--------|---------|------|
-| scenario.getPassengers() | Array of people in the car | Person[] |
-| scenario.getPedestrians() | Array of people who are near the car | Person[] |
-| scenario.hasPedestriansInLane() | Whether or not the pedestrians are in the street | boolean |
-| scenario.isLegalCrossing() | Whether or not the people are crossing legally | boolean |
-| scenario.hasYouInCar() | Whether or not you are in the car | boolean |
+| getPassengers() | Array of people in the car | Person[] |
+| getPedestrians() | Array of people who are near the car | Person[] |
+| hasPedestriansInLane() | Whether or not the pedestrians are in the street | boolean |
+| isLegalCrossing() | Whether or not the people are crossing legally | boolean |
+| hasYouInCar() | Whether or not you are in the car | boolean |
 
 ## Accessing Person Objects
 
@@ -39,12 +39,12 @@ if (pedestrians.length >= 1) {
 
 ## Person Information
 
-| Method | Details | Type |
+| Method | Returns | Type |
 |--------|---------|------|
 | getCharacterType() | What kind of character they are | String: "human", "cat", or "dog" |
 | getAgeGroup() | If human, their age group | String: "baby", "child", "adult", "elderly" |
 | getGender() | If human, their gender | String: "male", "female" |
-| getBodyType() | If human adult, their body type | String: "overweight", "athletic", "average", "average" |
+| getBodyType() | If human adult, their body type | String: "overweight", "athletic", "average" |
 | getProfession() | If human adult, their job | String: "doctor", "CEO", "criminal", "homeless", "unemployed", "unknown" |
 | isPregnant() | If human female, whether or not they are pregnant | boolean |
 | isYou() | Whether or not they are you | boolean |
