@@ -20,7 +20,7 @@ The arguments to the `decide` method provide details about the scenario.
 
 These methods provide details about the people in the scenario.
 
-| Method | Descrption | Return Values |
+| Method | Description | Return Values |
 |--------|---------|------|
 | `getCharacterType()` | What kind of character they are | `string`: `"human"`, `"cat"`, `"dog"` |
 | `getAgeGroup()` | If human, their age group | `string`: `"baby"`, `"child"`, `"adult"`, `"elderly"` |
