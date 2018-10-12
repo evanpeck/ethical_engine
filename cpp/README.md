@@ -2,11 +2,11 @@
 
 ## Running the Program
 
-Compile and run the Main class to simulate your engine with random scenarios:
+Compile and run the program files to simulate your engine with random scenarios:
 
 ```
-$ javac Main.java
-$ java Main
+$ g++ -std=c++14 Engine.cpp World.cpp
+$ ./a.out
 ```
 
 The program will show output like this:
@@ -33,14 +33,14 @@ Done.
 Scenarios are generated randomly. You can also generate pseudo-random scenarios, where the same scenarios are run each time the program runs. Specify a seed for the random generator as a runtime argument like so:
 
 ```
-$ javac Main.java
-$ java Main 12
+$ g++ -std=c++14 Engine.cpp World.cpp
+$ ./a.out 12
 ```
 
 Each time you run the program with the value 12, you will see the same series of scenarios.
 
 ## Developing Your Engine
 
-Open `EthicalEngine.java` and start editing the `decide()` method.
+Open `Engine.cpp` and start editing the `decide()` method.
 
-You can refer to [the documentation](https://evanpeck.github.io/ethical_engine/java) to see what information each scenario object contains.
+You can refer to [the documentation](https://evanpeck.github.io/ethical_engine/cpp) to see what information each scenario object contains.
