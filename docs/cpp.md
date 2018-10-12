@@ -8,7 +8,7 @@ Fill in the `decide` method with a program that analyzes the given scenario and 
 
 The arguments to the `decide` method provide details about the scenario.
 
-| Type | Argument | Description |
+| Type | Argument Name | Description |
 |--------|---------|------|
 | `Person` | `passenger` | Vector of people in the car |
 | `Person` | `pedestrian` | Vector of people who are near the car |
@@ -22,7 +22,7 @@ These methods provide details about the people in the scenario.
 
 | Method | Descrption | Return Values |
 |--------|---------|------|
-| `getCharacterType()` | What kind of character they are | `string`: `"human"`, `"cat"`, or `"dog"` |
+| `getCharacterType()` | What kind of character they are | `string`: `"human"`, `"cat"`, `"dog"` |
 | `getAgeGroup()` | If human, their age group | `string`: `"baby"`, `"child"`, `"adult"`, `"elderly"` |
 | `getGender()` | If human, their gender | `string`: `"male"`, `"female"` |
 | `getBodyType()` | If human adult, their body type | `string`: `"overweight"`, `"athletic"`, `"average"` |
