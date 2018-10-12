@@ -12,7 +12,7 @@ int main(int argc, char** argv) {
  * Decides whether to save the passengers or the pedestrians
  * @param Person passenger: the car passenger
  * @param Person pedestrian: the nearby pedestrian
- * @param bool hasPeds: whether or not the pedestrians are in the middle of the street
+ * @param bool hasPeds: whether or not the pedestrians are in the crossing lane
  * @param bool isLegal: Whether or not the people are crossing legally
  * @param bool hasYou: whether or not you are in the car
  * @return string: either "passenger" or "pedestrian" depending on who you choose to save
