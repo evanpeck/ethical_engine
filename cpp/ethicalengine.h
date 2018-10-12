@@ -45,6 +45,6 @@ class Scenario {
         bool hasYouInCar();
 };
 
-string decide(Scenario scenario);
+string decide(Person passenger, Person pedestrian, bool hasPeds, bool isLegal, bool hasYou);
 int getSeed(int argc, char** argv);
 void runSimulation(int seed);

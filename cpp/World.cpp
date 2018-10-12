@@ -197,6 +197,15 @@ int getSeed(int argc, char** argv) {
     return seed;
 }
 
+string getDecision(Scenario scenario) {
+    Person passenger = scenario.getPassengers()[0];
+    Person pedestrian = scenario.getPedestrians()[0];
+    bool peds = scenario.hasPedestriansInLane();
+    bool legal = scenario.isLegalCrossing();
+    bool you = scenario.hasYouInCar();
+    return decide(passenger, pedestrian, peds, legal, you);
+}
+
 void runSimulation(int seed) {
     srand(seed);
     while (true) {
@@ -210,7 +219,7 @@ void runSimulation(int seed) {
         // showPersonAttributes(passenger);
         // showPersonAttributes(pedestrian);
         cout << details << endl;
-        string result = decide(scenario);
+        string result = getDecision(scenario);
         cout << "Hit any key to see decision: " << endl;
         string line;
         getline(cin, line);
