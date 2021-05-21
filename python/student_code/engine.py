@@ -32,7 +32,78 @@ def decide(scenario):
     # Your program must choose to save either pedestrians or passengers.
     # This is an overly simple rule that only saves the passengers if there are
     # more passengers than pedestrians.
-    if len(scenario.passengers) > len(scenario.pedestrians):
-        return "passengers"
+
+    # if len(scenario.passengers) > len(scenario.pedestrians):
+    #     return "passengers"
+    # else:
+    #     return "pedestrians"
+    print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+    # print(scenario)
+    # for attr in dir(scenario):
+    #     print("scenario.%s = %r" % (attr, getattr(scenario, attr)))
+
+        #     for passenger in self.passengers:
+        #     readable += '-' + str(passenger) + '\n'
+
+        # readable += '\n'
+        # readable += 'Pedestrians: \n'
+        # for pedestrian in self.pedestrians:
+        #     readable += '-' + str(pedestrian) + '\n'
+    # print("----------------")
+    # print(scenario.passengers)
+    utilityPassengers = 0
+    utilityPedestrians = 0
+    utilityPassPregnant = 0
+    utilityPedesPregnant = 0
+    virtuePass = 0
+    virtuePedes = 0
+    personValue ={
+        'baby': 4,
+        'child': 3,
+        'adult': 2, 
+        'elderly': 1
+    }
+
+    for person in scenario.passengers:
+        utilityPassengers = utilityPassengers + personValue.get(person.age, 0)
+        if person.charType == "you":
+            utilityPassengers = utilityPassengers + 2
+        if person.pregnant:
+            utilityPassPregnant = utilityPassPregnant + 1
+        if person.profession == 'homeless':
+            virtuePass = virtuePass + 1
+
+
+    for person in scenario.pedestrians:
+        utilityPedestrians = utilityPedestrians + personValue.get(person.age, 0) 
+        if person.pregnant:
+            utilityPedesPregnant = utilityPedesPregnant + 1
+        if person.profession == 'homeless':
+            virtuePedes = virtuePedes + 1
+
+    print("UtilityPassengers:", utilityPassengers, "UtilityPedestrians:", utilityPedestrians)
+    print("utilityPassPregnant:", utilityPassPregnant, "utilityPedesPregnant:", utilityPedesPregnant)
+    print("Peds are in vehicle lane:", scenario.pedsInLane)
+    print("ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ")
+
+    if (scenario.pedsInLane == False) and ((utilityPassengers - utilityPedestrians) < 2):  
+        # if the pedestrians are not in the vehicle's lane always favor them unless there are at least two
+        # more people in the vehicle than in the crosswalk
+        return "pedestrians" 
     else:
-        return "pedestrians"
+        if utilityPedestrians < utilityPassengers:
+            return "passengers"
+        elif utilityPedestrians > utilityPassengers:
+            return "pedestrians"
+        else:
+            if utilityPedesPregnant < utilityPassPregnant:
+                return "passengers"
+            elif utilityPedesPregnant > utilityPassPregnant:
+                return "pedestrians"
+            else:
+                if virtuePedes < virtuePass:
+                    return "passengers"
+                elif virtuePedes > virtuePass:
+                    return "pedestrians"
+                else:
+                    return "pedestrians" 
