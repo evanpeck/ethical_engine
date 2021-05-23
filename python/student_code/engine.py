@@ -37,7 +37,6 @@ def decide(scenario):
     #     return "passengers"
     # else:
     #     return "pedestrians"
-    print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
     # print(scenario)
     # for attr in dir(scenario):
     #     print("scenario.%s = %r" % (attr, getattr(scenario, attr)))
@@ -67,7 +66,7 @@ def decide(scenario):
     for person in scenario.passengers:
         utilityPassengers = utilityPassengers + personValue.get(person.age, 0)
         if person.charType == "you":
-            utilityPassengers = utilityPassengers + 2
+            utilityPassengers = utilityPassengers + 5
         if person.pregnant:
             utilityPassPregnant = utilityPassPregnant + 1
         if person.profession == 'homeless':
@@ -81,10 +80,11 @@ def decide(scenario):
         if person.profession == 'homeless':
             virtuePedes = virtuePedes + 1
 
-    print("UtilityPassengers:", utilityPassengers, "UtilityPedestrians:", utilityPedestrians)
-    print("utilityPassPregnant:", utilityPassPregnant, "utilityPedesPregnant:", utilityPedesPregnant)
-    print("Peds are in vehicle lane:", scenario.pedsInLane)
-    print("ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ")
+    # The following 3 lines helpful for auditing. Uncomment them to see what utility the  algorithm 
+    # assigns to the pedestrians and the passengers: 
+    # print("UtilityPassengers:", utilityPassengers, "UtilityPedestrians:", utilityPedestrians)
+    # print("UtilityPassPregnant:", utilityPassPregnant, "UtilityPedesPregnant:", utilityPedesPregnant)
+    # print("Peds are in vehicle lane:", scenario.pedsInLane)
 
     if (scenario.pedsInLane == False) and ((utilityPassengers - utilityPedestrians) < 2):  
         # if the pedestrians are not in the vehicle's lane always favor them unless there are at least two

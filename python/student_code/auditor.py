@@ -77,15 +77,23 @@ def audit():
         # print(livePregnant)
     print("Passengers Saved:", passengersSaved)
     print("Pedestrians Saved", pedestriansSaved)
-    print("Homeless saved:", liveProfession.count("homeless"), "Homeless died:", dieProfession.count("homeless"),"Ratio:", liveProfession.count("homeless")/dieProfession.count("homeless"))
-    print("Doctors saved:", liveProfession.count("doctor"), "Doctors died:", dieProfession.count("doctor"),"Ratio:", liveProfession.count("doctor")/dieProfession.count("doctor"))
-    print("Pregnant Saved:", livePregnant.count(True), "Pregnant Died:", diePregnant.count(True),"Ratio:", livePregnant.count(True)/diePregnant.count(True)  )
-    print("Males Saved:", liveGender.count("male"), "Males Died:", dieGender.count("male"), "Ratio:", liveGender.count("male")/dieGender.count("male"))
-    print("Females Saved:", liveGender.count("female"), "Females Died:", dieGender.count("female"), "Ratio:", liveGender.count("female")/dieGender.count("female"))
-    print( "Baby Ratio:", liveAge.count("baby")/dieAge.count("baby"))
-    print( "Child Ratio:", liveAge.count("child")/dieAge.count("child"))
-    print( "Adult Ratio:", liveAge.count("adult")/dieAge.count("adult"))
-    print( "Elderly Ratio:", liveAge.count("elderly")/dieAge.count("elderly"))
-    
+    print("Homeless saved:", liveProfession.count("homeless"), "Homeless died:", dieProfession.count("homeless"),"Percent live:", calcRatio( liveProfession.count("homeless"),dieProfession.count("homeless") ) ) 
+    print("Doctors saved:", liveProfession.count("doctor"), "Doctors died:", dieProfession.count("doctor"),"Percent live:", calcRatio( liveProfession.count("doctor"),dieProfession.count("doctor") ) )
+    print("Pregnant Saved:", livePregnant.count(True), "Pregnant Died:", diePregnant.count(True),"Percent live:", calcRatio( livePregnant.count(True),diePregnant.count(True) ) )
+    print("Males Saved:", liveGender.count("male"), "Males Died:", dieGender.count("male"), "Percent live:", calcRatio( liveGender.count("male"),dieGender.count("male") ) )
+    print("Females Saved:", liveGender.count("female"), "Females Died:", dieGender.count("female"), "Percent live:", calcRatio( liveGender.count("female"),dieGender.count("female") ) )
+    print( "You Ratio:", calcRatio(liveCharType.count("you"),dieCharType.count("you")) )
+    print( "Baby Ratio:", calcRatio(liveAge.count("baby"),dieAge.count("baby")) )
+    print( "Child Ratio:", calcRatio(liveAge.count("child"),dieAge.count("child")) )
+    print( "Adult Ratio:", calcRatio(liveAge.count("adult"),dieAge.count("adult")) )
+    print( "Elderly Ratio:", calcRatio(liveAge.count("elderly"),dieAge.count("elderly")) )
+
+
+def calcRatio(live, die):
+    ratio = live/(live + die)
+    percent = round(ratio * 100, 2)
+    return percent;
+
+
 if __name__ == '__main__':
     audit()
