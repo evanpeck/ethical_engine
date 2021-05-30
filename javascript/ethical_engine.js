@@ -248,7 +248,7 @@ function decide(scenario){
         }
     }
  
-
+    // for a simple demo of the decide function just use this:
     // if (utilityPassengers > utilityPedestrians){
     //     return "passengers"
     // }else{
@@ -260,79 +260,92 @@ function decide(scenario){
 }
 
 function audit(){
-    let liveProfession = []
-    let livePregnant = []
-    let liveGender = []
-    let liveCharType = []
-    let liveAge = []
+    let auditMe = new Audit()
+    auditMe.runSimulation()
+    auditMe.outputResults()
+}
 
-    let dieProfession = []
-    let diePregnant = []
-    let dieGender = []
-    let dieCharType = []
-    let dieAge = []
+function Audit(){
+    this.liveProfession = []
+    this.livePregnant = []
+    this.liveGender = []
+    this.liveCharType = []
+    this.liveAge = []
 
-    let pedestriansSaved = 0
-    let passengersSaved = 0
+    this.dieProfession = []
+    this.diePregnant = []
+    this.dieGender = []
+    this.dieCharType = []
+    this.dieAge = []
 
-    let simulations = 0
+    this.pedestriansSaved = 0
+    this.passengersSaved = 0
 
-    while(simulations < 10000){
-        let scenario = new Scenario()
-        result = decide(scenario)
-        if (result == "passengers"){
-            for (x=0; x < scenario.passengers.length; x++) {
-                let person = scenario.passengers[x]
-                liveProfession.push(person.profession)
-                livePregnant.push(person.pregnant)
-                liveGender.push(person.gender)
-                liveCharType.push(person.charType)
-                liveAge.push(person.age)
-                passengersSaved += 1
+    this.simulations = 0
+
+    this.runSimulation = function(){
+        while(this.simulations < 10000){
+            let scenario = new Scenario()
+            result = decide(scenario)
+            if (result == "passengers"){
+                for (x=0; x < scenario.passengers.length; x++) {
+                    let person = scenario.passengers[x]
+                    this.aggregateResults("live",person)
+                    this.passengersSaved += 1
+                }
+                for (x=0; x < scenario.pedestrians.length; x++) {
+                    let person = scenario.pedestrians[x]
+                    this.aggregateResults("die",person)
+                }
             }
-            for (x=0; x < scenario.pedestrians.length; x++) {
-                let person = scenario.pedestrians[x]
-                dieProfession.push(person.profession)
-                diePregnant.push(person.pregnant)
-                dieGender.push(person.gender)
-                dieCharType.push(person.charType)
-                dieAge.push(person.age)
+            else{
+                for (x=0; x < scenario.pedestrians.length; x++) {
+                    let person = scenario.pedestrians[x]
+                    this.aggregateResults("live",person)
+                    this.pedestriansSaved += 1
+                }
+                for (x=0; x < scenario.passengers.length; x++) {
+                    let person = scenario.passengers[x]
+                    this.aggregateResults("die",person)
+                }
             }
+            this.simulations = this.simulations + 1
+            console.log("Simulations: ", this.simulations)
         }
-        else{
-            for (x=0; x < scenario.pedestrians.length; x++) {
-                let person = scenario.pedestrians[x]
-                liveProfession.push(person.profession)
-                livePregnant.push(person.pregnant)
-                liveGender.push(person.gender)
-                liveCharType.push(person.charType)
-                liveAge.push(person.age)
-                pedestriansSaved += 1
-            }
-            for (x=0; x < scenario.passengers.length; x++) {
-                let person = scenario.passengers[x]
-                dieProfession.push(person.profession)
-                diePregnant.push(person.pregnant)
-                dieGender.push(person.gender)
-                dieCharType.push(person.charType)
-                dieAge.push(person.age)
-            }
-        }
-        simulations = simulations + 1
-        console.log("Simulations: ", simulations)
     }
-    console.log("Passengers Saved:", passengersSaved)
-    console.log("Pedestrians Saved", pedestriansSaved)
-    console.log("Homeless saved:", liveProfession.count("homeless"), "Homeless died:", dieProfession.count("homeless"),"Percent live:", calcRatio( liveProfession.count("homeless"),dieProfession.count("homeless") ) ) 
-    console.log("Doctors saved:", liveProfession.count("doctor"), "Doctors died:", dieProfession.count("doctor"),"Percent live:", calcRatio( liveProfession.count("doctor"),dieProfession.count("doctor") ) )
-    console.log("Pregnant Saved:", livePregnant.count(true), "Pregnant Died:", diePregnant.count(true),"Percent live:", calcRatio( livePregnant.count(true),diePregnant.count(true) ) )
-    console.log("Males Saved:", liveGender.count("male"), "Males Died:", dieGender.count("male"), "Percent live:", calcRatio( liveGender.count("male"),dieGender.count("male") ) )
-    console.log("Females Saved:", liveGender.count("female"), "Females Died:", dieGender.count("female"), "Percent live:", calcRatio( liveGender.count("female"),dieGender.count("female") ) )
-    console.log( "You Ratio:", calcRatio(liveCharType.count("you"),dieCharType.count("you")) )
-    console.log( "Baby Ratio:", calcRatio(liveAge.count("baby"),dieAge.count("baby")) )
-    console.log( "Child Ratio:", calcRatio(liveAge.count("child"),dieAge.count("child")) )
-    console.log( "Adult Ratio:", calcRatio(liveAge.count("adult"),dieAge.count("adult")) )
-    console.log( "Elderly Ratio:", calcRatio(liveAge.count("elderly"),dieAge.count("elderly")) )
+
+    this.aggregateResults = function (liveDie, person){
+        if(liveDie == "live"){
+            this.liveProfession.push(person.profession)
+            this.livePregnant.push(person.pregnant)
+            this.liveGender.push(person.gender)
+            this.liveCharType.push(person.charType)
+            this.liveAge.push(person.age)
+        }else{
+            this.dieProfession.push(person.profession)
+            this.diePregnant.push(person.pregnant)
+            this.dieGender.push(person.gender)
+            this.dieCharType.push(person.charType)
+            this.dieAge.push(person.age)
+        }
+    }
+
+
+    this.outputResults = function(){
+        console.log("Passengers Saved:", this.passengersSaved)
+        console.log("Pedestrians Saved", this.pedestriansSaved)
+        console.log("Homeless saved:", this.liveProfession.count("homeless"), "Homeless died:", this.dieProfession.count("homeless"),"Percent live:", calcRatio( this.liveProfession.count("homeless"),this.dieProfession.count("homeless") ) ) 
+        console.log("Doctors saved:", this.liveProfession.count("doctor"), "Doctors died:", this.dieProfession.count("doctor"),"Percent live:", calcRatio( this.liveProfession.count("doctor"),this.dieProfession.count("doctor") ) )
+        console.log("Pregnant Saved:", this.livePregnant.count(true), "Pregnant Died:", this.diePregnant.count(true),"Percent live:", calcRatio( this.livePregnant.count(true),this.diePregnant.count(true) ) )
+        console.log("Males Saved:", this.liveGender.count("male"), "Males Died:", this.dieGender.count("male"), "Percent live:", calcRatio( this.liveGender.count("male"),this.dieGender.count("male") ) )
+        console.log("Females Saved:", this.liveGender.count("female"), "Females Died:", this.dieGender.count("female"), "Percent live:", calcRatio( this.liveGender.count("female"),this.dieGender.count("female") ) )
+        console.log( "You Ratio:", calcRatio(this.liveCharType.count("you"),this.dieCharType.count("you")) )
+        console.log( "Baby Ratio:", calcRatio(this.liveAge.count("baby"),this.dieAge.count("baby")) )
+        console.log( "Child Ratio:", calcRatio(this.liveAge.count("child"),this.dieAge.count("child")) )
+        console.log( "Adult Ratio:", calcRatio(this.liveAge.count("adult"),this.dieAge.count("adult")) )
+        console.log( "Elderly Ratio:", calcRatio(this.liveAge.count("elderly"),this.dieAge.count("elderly")) )
+    
+    }
 
 }
 
@@ -363,18 +376,3 @@ function calcRatio(live,die){
     return percent
 }
 
-// function aggregateResults(liveDie, person){
-//     if(liveDie == "live"){
-//         liveProfession.push(person.profession)
-//         livePregnant.push(person.pregnant)
-//         liveGender.push(person.gender)
-//         liveCharType.push(person.charType)
-//         liveAge.push(person.age)
-//     }else{
-//         dieProfession.push(person.profession)
-//         diePregnant.push(person.pregnant)
-//         dieGender.push(person.gender)
-//         dieCharType.push(person.charType)
-//         dieAge.push(person.age)
-//     }
-// }
