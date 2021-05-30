@@ -1,22 +1,15 @@
-// The following variable just used to pass a default variable to arguments...
-// const None = "N";
-
 function main(){
 
-    // const foo = new Person("you")
-    // console.log("foo", foo)
     console.log("===========================================")
     console.log("THE ETHICAL ENGINE")
     console.log("===========================================")
-    const scene = new scenario()
+    const scene = new Scenario()
     console.log(scene.stringRep())
-    // print()
     const result = decide(scene)
     console.log("I chose to save the ", result)
 }
 
-// passengers=None, pedestrians=None, youInCar=None, legalCrossing=None, pedsInLane=None,
-function scenario(passengers, pedestrians, youInCar, legalCrossing, pedsInLane, sameNum=false){
+function Scenario(passengers, pedestrians, youInCar, legalCrossing, pedsInLane, sameNum=false){
 
     const MIN_PASSENGERS = 0
     const MAX_PASSENGERS = 4
@@ -160,14 +153,6 @@ function Person(charType, age, profession, gender, bodyType, pregnant){
         }
     }
 
-    
-    
-    // this.profession = profession
-    // this.age = age
-    // this.gender = gender
-    // this.bodyType = bodyType
-    // this.pregnant = pregnant
-
     this.stringRep = function(){
         let readable = ''
         readable += this.charType + " | " 
@@ -175,7 +160,6 @@ function Person(charType, age, profession, gender, bodyType, pregnant){
         readable += " gender:" + this.gender + " | " 
         readable += "body-type:" + this.bodyType + " | " 
         readable += "pregnant:" + this.pregnant + " | " 
-        // readable += '\n '
         return(readable)
     }
 
@@ -185,7 +169,6 @@ function Person(charType, age, profession, gender, bodyType, pregnant){
 
 
 function decide(scenario){
-    //console.log("pass:  ",scenario.passengers.length)
     if (scenario.passengers.length > scenario.pedestrians.length){
         return "passengers"
     }else{
@@ -193,7 +176,7 @@ function decide(scenario){
     }
 }
 
-//Utility Functions
+// Utility Functions
 function randomChoice(choices) {
     var index = Math.floor(Math.random() * choices.length);
     return choices[index];
