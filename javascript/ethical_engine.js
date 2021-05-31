@@ -176,7 +176,13 @@ function decide(scenario){
     // scenario.pedsInLane (if true pedestrians are in same lane as car)
     // scenarion.legalCrossing (if true pedestrians are crossing legally)
     // scenario.passengers and scenario.pedestrians (arrays of person objects)
-    // person.charType, person.age, person.gender, person.bodyType, person.pregnant
+    // attributes in each person object:
+    // person.charType: human, dog, cat 
+    // person.age: baby, child, adult, elderly 
+    // person.gender: male, female 
+    // person.bodyType: overweight, athletic, average  
+    // person.pregnant: true, false
+    // person.profession: doctor, CEO, criminal, homeless, unemployed, unknown 
 
     let utilityPassengers = 0
     let utilityPedestrians = 0
@@ -340,6 +346,7 @@ function Audit(){
         console.log("Males Saved:", this.liveGender.count("male"), "Males Died:", this.dieGender.count("male"), "Percent live:", calcRatio( this.liveGender.count("male"),this.dieGender.count("male") ) )
         console.log("Females Saved:", this.liveGender.count("female"), "Females Died:", this.dieGender.count("female"), "Percent live:", calcRatio( this.liveGender.count("female"),this.dieGender.count("female") ) )
         console.log( "You Ratio:", calcRatio(this.liveCharType.count("you"),this.dieCharType.count("you")) )
+        console.log( "Dog Ratio:", calcRatio(this.liveCharType.count("dog"),this.dieCharType.count("dog")) )
         console.log( "Baby Ratio:", calcRatio(this.liveAge.count("baby"),this.dieAge.count("baby")) )
         console.log( "Child Ratio:", calcRatio(this.liveAge.count("child"),this.dieAge.count("child")) )
         console.log( "Adult Ratio:", calcRatio(this.liveAge.count("adult"),this.dieAge.count("adult")) )
