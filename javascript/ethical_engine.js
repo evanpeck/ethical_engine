@@ -11,10 +11,10 @@ function main(){
 
 function Scenario(passengers, pedestrians, youInCar, legalCrossing, pedsInLane, sameNum=false){
 
-    const MIN_PASSENGERS = 0
-    const MAX_PASSENGERS = 4
+    const MIN_PASSENGERS = 1
+    const MAX_PASSENGERS = 7
     const MIN_PEDESTRIANS = 1
-    const MAX_PEDESTRIANS = 4
+    const MAX_PEDESTRIANS = 7
 
     const YOU_CHANCE = [true, false, false, false]
     const LEGAL_CROSSING_CHANCE = [true, true, false]
@@ -227,9 +227,14 @@ function decide(scenario){
     // Keep for auditing purposes
     // console.log("Pass:", utilityPassengers, "Pedes", utilityPedestrians)
 
-    if ((scenario.pedsInLane == false) && ((utilityPassengers - utilityPedestrians) < 2)){
+    if ((scenario.pedsInLane == false)){
         // pedestrians are in other lane
-        return "pedestrians"
+        if ((utilityPassengers - utilityPedestrians) > 5){
+            //favor pedestrians except for extreme differences
+            return "passengers"
+        }else{
+            return "pedestrians"
+        }
     }  
     else{
         // pedestrians are in same lane
@@ -308,6 +313,11 @@ function Audit(){
         unemployed : {live:0,die:0},
         unknown : {live:0,die:0},
 
+        //
+        pedsInLaneTrue : {live:0,die:0}, // this only counts pedestrian lives and deaths 
+        pedsInLaneFalse : {live:0,die:0}, // this only counts pedestrian lives and deaths 
+
+
         undefined : {live:0,die:0} // this attribute aggregates data like pregnant.undefined profession.undefined etc 
     }
 
@@ -317,16 +327,28 @@ function Audit(){
         while(this.simulations < 10000){
             let scenario = new Scenario()
             result = decide(scenario)
+
+            let pedsInLaneKey = ""
+            if (scenario.pedsInLane){
+                
+                pedsInLaneKey = "pedsInLaneTrue"
+            }else{
+
+                pedsInLaneKey = "pedsInLaneFalse"
+            }
+
             if (result == "passengers"){
                 for (x=0; x < scenario.passengers.length; x++) {
                     let person = scenario.passengers[x]
                     this.aggregateResults("live",person)
                     this.biasMetrics.passengers.live += 1
+                    //this.biasMetrics[pedsInLaneKey].live += 1
                 }
                 for (x=0; x < scenario.pedestrians.length; x++) {
                     let person = scenario.pedestrians[x]
                     this.aggregateResults("die",person)
                     this.biasMetrics.pedestrians.die += 1
+                    this.biasMetrics[pedsInLaneKey].die += 1
                 }
             }
             else{
@@ -334,13 +356,16 @@ function Audit(){
                     let person = scenario.pedestrians[x]
                     this.aggregateResults("live",person)
                     this.biasMetrics.pedestrians.live += 1
+                    this.biasMetrics[pedsInLaneKey].live += 1
                 }
                 for (x=0; x < scenario.passengers.length; x++) {
                     let person = scenario.passengers[x]
                     this.aggregateResults("die",person)
                     this.biasMetrics.passengers.die += 1
+                    //this.biasMetrics[pedsInLaneKey].die += 1
                 }
             }
+
             this.simulations = this.simulations + 1
             console.log("Simulations: ", this.simulations)
         }
@@ -364,7 +389,9 @@ function Audit(){
 
 
     this.outputResults = function(){
-        console.log("AGGREGATED RESULTS:")
+        console.log("Live/Die Ratio Sorted By Most Likely To Die To Least Likely")
+        console.log("(Note: All ratios calculated using passengers and pedestrians lives and deaths")
+        console.log("except for ratios titled 'pedsInLaneFalse, pedsInLaneTrue, passengers, pedestrians')")
         let sortable = []
         for (var identity in this.biasMetrics) {
             sortable.push([identity,this.biasMetrics[identity].percentLive])
@@ -373,8 +400,11 @@ function Audit(){
             return a[1] - b[1]
         })
         sortable.forEach(e =>{
-            console.log(e[0], e[1].toFixed(2))
+            if (e[0] != "undefined"){
+                console.log(e[0], e[1].toFixed(2))
+            }            
         })
+
     }
 
 }
