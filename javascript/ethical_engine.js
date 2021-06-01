@@ -272,20 +272,43 @@ function audit(){
 }
 
 function Audit(){
-    this.liveProfession = []
-    this.livePregnant = []
-    this.liveGender = []
-    this.liveCharType = []
-    this.liveAge = []
+    // this.liveProfession = []
+    // this.livePregnant = []
+    // this.liveGender = []
+    // this.liveCharType = []
+    // this.liveAge = []
 
-    this.dieProfession = []
-    this.diePregnant = []
-    this.dieGender = []
-    this.dieCharType = []
-    this.dieAge = []
+    // this.dieProfession = []
+    // this.diePregnant = []
+    // this.dieGender = []
+    // this.dieCharType = []
+    // this.dieAge = []
 
-    this.pedestriansSaved = 0
-    this.passengersSaved = 0
+    // this.pedestriansSaved = 0
+    // this.passengersSaved = 0
+
+    // this.pedestrians = {}
+    // this.passengers = {}
+    // this.legal = {}
+    // this.illegal = {}
+    // this.sameLane = {}
+    // this.otherLane = {}
+    this.pedestrians = {live:0,die:0}
+    this.passengers = {live:0,die:0}
+
+
+    this.female = {live:0,die:0}
+    this.male = {live:0,die:0}
+    
+
+    this.doctor = {live:0,die:0}
+    this.CEO = {live:0,die:0}
+    this.criminal = {live:0,die:0}
+    this.homeless = {live:0,die:0}
+    this.unemployed = {live:0,die:0}
+    this.unknown = {live:0,die:0}
+
+    this.undefined = {live:0,die:0} // this attribute aggregates data like pregnant.undefined profession.undefined etc 
 
     this.simulations = 0
 
@@ -297,60 +320,95 @@ function Audit(){
                 for (x=0; x < scenario.passengers.length; x++) {
                     let person = scenario.passengers[x]
                     this.aggregateResults("live",person)
-                    this.passengersSaved += 1
+                    this.passengers.live += 1
                 }
                 for (x=0; x < scenario.pedestrians.length; x++) {
                     let person = scenario.pedestrians[x]
                     this.aggregateResults("die",person)
+                    this.pedestrians.die += 1
                 }
             }
             else{
                 for (x=0; x < scenario.pedestrians.length; x++) {
                     let person = scenario.pedestrians[x]
                     this.aggregateResults("live",person)
-                    this.pedestriansSaved += 1
+                    this.pedestrians.live += 1
                 }
                 for (x=0; x < scenario.passengers.length; x++) {
                     let person = scenario.passengers[x]
                     this.aggregateResults("die",person)
+                    this.passengers.die += 1
                 }
             }
             this.simulations = this.simulations + 1
             console.log("Simulations: ", this.simulations)
         }
+        for (var identity in this) {
+            //console.log("HHHHHHHHHHHHH", this[identity].live, this[identity].die)
+            this[identity].percentLive = this[identity].live / (this[identity].live + this[identity].die)
+            
+        }
     }
 
     this.aggregateResults = function (liveDie, person){
         if(liveDie == "live"){
-            this.liveProfession.push(person.profession)
-            this.livePregnant.push(person.pregnant)
-            this.liveGender.push(person.gender)
-            this.liveCharType.push(person.charType)
-            this.liveAge.push(person.age)
+            //console.log("person.gender",person.gender)
+            this[person.profession].live += 1
+            //console.log("GGGGGGGGGGGGGGGGGGG", this['male'], this['fe'])
+            this[person.gender].live += 1
+            //console.log("BBBBBBBBBBBBBBBBBBBBBBBBBBBB", this[person.gender].live)
         }else{
-            this.dieProfession.push(person.profession)
-            this.diePregnant.push(person.pregnant)
-            this.dieGender.push(person.gender)
-            this.dieCharType.push(person.charType)
-            this.dieAge.push(person.age)
+            //console.log("person.profession",person.profession)
+            this[person.profession].die += 1
+            this[person.gender].die += 1
+            // this.dieProfession.push(person.profession)
+            // this.diePregnant.push(person.pregnant)
+            // this.dieGender.push(person.gender)
+            // this.dieCharType.push(person.charType)
+            // this.dieAge.push(person.age)
         }
+
     }
 
 
     this.outputResults = function(){
-        console.log("Passengers Saved:", this.passengersSaved)
-        console.log("Pedestrians Saved", this.pedestriansSaved)
-        console.log("Homeless saved:", this.liveProfession.count("homeless"), "Homeless died:", this.dieProfession.count("homeless"),"Percent live:", calcRatio( this.liveProfession.count("homeless"),this.dieProfession.count("homeless") ) ) 
-        console.log("Doctors saved:", this.liveProfession.count("doctor"), "Doctors died:", this.dieProfession.count("doctor"),"Percent live:", calcRatio( this.liveProfession.count("doctor"),this.dieProfession.count("doctor") ) )
-        console.log("Pregnant Saved:", this.livePregnant.count(true), "Pregnant Died:", this.diePregnant.count(true),"Percent live:", calcRatio( this.livePregnant.count(true),this.diePregnant.count(true) ) )
-        console.log("Males Saved:", this.liveGender.count("male"), "Males Died:", this.dieGender.count("male"), "Percent live:", calcRatio( this.liveGender.count("male"),this.dieGender.count("male") ) )
-        console.log("Females Saved:", this.liveGender.count("female"), "Females Died:", this.dieGender.count("female"), "Percent live:", calcRatio( this.liveGender.count("female"),this.dieGender.count("female") ) )
-        console.log( "You Ratio:", calcRatio(this.liveCharType.count("you"),this.dieCharType.count("you")) )
-        console.log( "Dog Ratio:", calcRatio(this.liveCharType.count("dog"),this.dieCharType.count("dog")) )
-        console.log( "Baby Ratio:", calcRatio(this.liveAge.count("baby"),this.dieAge.count("baby")) )
-        console.log( "Child Ratio:", calcRatio(this.liveAge.count("child"),this.dieAge.count("child")) )
-        console.log( "Adult Ratio:", calcRatio(this.liveAge.count("adult"),this.dieAge.count("adult")) )
-        console.log( "Elderly Ratio:", calcRatio(this.liveAge.count("elderly"),this.dieAge.count("elderly")) )
+        console.log("AGGREGATED RESULTS:")
+
+
+        let sortable = []
+        for (var identity in this) {
+            console.log("CCCCCCCCCCCC",identity)
+            let otherIdentifiers = {simulations:'',aggregateResults:'',outputResults:'',runSimulation:''}
+            if(identity in otherIdentifiers){
+                console.log("do nothing", identity)
+            }else
+            {
+                console.log(identity, this[identity].percentLive.toFixed(2))
+                sortable.push([identity,this[identity].percentLive])
+            }
+
+        }
+        console.log("XXXXXXXXXX",sortable)
+        sortable.sort(function(a,b){
+            return a[1] - b[1]
+        })
+        console.log("XXXXXXXXXXX",sortable)
+        sortable.forEach(e =>{
+            console.log(e[0], e[1].toFixed(2))
+        })
+        // console.log("Passengers Saved:", this.passengersSaved)
+        // console.log("Pedestrians Saved", this.pedestriansSaved)
+        // console.log("Homeless saved:", this.liveProfession.count("homeless"), "Homeless died:", this.dieProfession.count("homeless"),"Percent live:", calcRatio( this.liveProfession.count("homeless"),this.dieProfession.count("homeless") ) ) 
+        // console.log("Doctors saved:", this.liveProfession.count("doctor"), "Doctors died:", this.dieProfession.count("doctor"),"Percent live:", calcRatio( this.liveProfession.count("doctor"),this.dieProfession.count("doctor") ) )
+        // console.log("Pregnant Saved:", this.livePregnant.count(true), "Pregnant Died:", this.diePregnant.count(true),"Percent live:", calcRatio( this.livePregnant.count(true),this.diePregnant.count(true) ) )
+        // console.log("Males Saved:", this.liveGender.count("male"), "Males Died:", this.dieGender.count("male"), "Percent live:", calcRatio( this.liveGender.count("male"),this.dieGender.count("male") ) )
+        // console.log("Females Saved:", this.liveGender.count("female"), "Females Died:", this.dieGender.count("female"), "Percent live:", calcRatio( this.liveGender.count("female"),this.dieGender.count("female") ) )
+        // console.log( "You Ratio:", calcRatio(this.liveCharType.count("you"),this.dieCharType.count("you")) )
+        // console.log( "Dog Ratio:", calcRatio(this.liveCharType.count("dog"),this.dieCharType.count("dog")) )
+        // console.log( "Baby Ratio:", calcRatio(this.liveAge.count("baby"),this.dieAge.count("baby")) )
+        // console.log( "Child Ratio:", calcRatio(this.liveAge.count("child"),this.dieAge.count("child")) )
+        // console.log( "Adult Ratio:", calcRatio(this.liveAge.count("adult"),this.dieAge.count("adult")) )
+        // console.log( "Elderly Ratio:", calcRatio(this.liveAge.count("elderly"),this.dieAge.count("elderly")) )
     
     }
 
