@@ -272,27 +272,6 @@ function audit(){
 }
 
 function Audit(){
-    // this.liveProfession = []
-    // this.livePregnant = []
-    // this.liveGender = []
-    // this.liveCharType = []
-    // this.liveAge = []
-
-    // this.dieProfession = []
-    // this.diePregnant = []
-    // this.dieGender = []
-    // this.dieCharType = []
-    // this.dieAge = []
-
-    // this.pedestriansSaved = 0
-    // this.passengersSaved = 0
-
-    // this.pedestrians = {}
-    // this.passengers = {}
-    // this.legal = {}
-    // this.illegal = {}
-    // this.sameLane = {}
-    // this.otherLane = {}
     this.biasMetrics = {
         pedestrians : {live:0,die:0},
         passengers : {live:0,die:0},
@@ -329,17 +308,7 @@ function Audit(){
         unemployed : {live:0,die:0},
         unknown : {live:0,die:0},
 
-
-
         undefined : {live:0,die:0} // this attribute aggregates data like pregnant.undefined profession.undefined etc 
-    
-
-    // person.charType: human, dog, cat 
-    // person.age: baby, child, adult, elderly 
-    // person.gender: male, female 
-    // person.bodyType: overweight, athletic, average  
-    // person.pregnant: true, false
-    // person.profession: doctor, CEO, criminal, homeless, unemployed, unknown
     }
 
     this.simulations = 0
@@ -376,94 +345,39 @@ function Audit(){
             console.log("Simulations: ", this.simulations)
         }
         for (var identity in this.biasMetrics) {
-            //console.log("HHHHHHHHHHHHH", this[identity].live, this[identity].die)
             this.biasMetrics[identity].percentLive = this.biasMetrics[identity].live / (this.biasMetrics[identity].live + this.biasMetrics[identity].die)
-            
         }
     }
 
     this.aggregateResults = function (liveDie, person){
         for (var identity in person) {
-            //console.log("HOHHOHOHOOHH:",typeof person[identity])
             if(typeof person[identity] == "string"){
                 // run on all keys except for person.stringRep function and person.pregnant boolean
-                //console.log(person[identity])
                 this.biasMetrics[person[identity]][liveDie] += 1
             }
             if(typeof person[identity] == "boolean"){
                 // run on person.pregnant boolean
-                //console.log(person[identity])
                 this.biasMetrics.pregnant[liveDie] += 1
             }
-            //this.biasMetrics[person[identity]][liveDie] += 1
         }
-        // if(liveDie == "live"){
-        //     //console.log("person.gender",person.gender)
-        //     this.biasMetrics[person.profession].live += 1
-        //     //console.log("GGGGGGGGGGGGGGGGGGG", this['male'], this['fe'])
-        //     this.biasMetrics[person.gender].live += 1
-        //     this.biasMetrics[person.charType].live += 1
-        //     //console.log("BBBBBBBBBBBBBBBBBBBBBBBBBBBB", this[person.gender].live)
-        //     // person.charType: human, dog, cat 
-        //     // person.age: baby, child, adult, elderly 
-        //     // person.gender: male, female 
-        //     // person.bodyType: overweight, athletic, average  
-        //     // person.pregnant: true, false
-        //     // person.profession: doctor, CEO, criminal, homeless, unemployed, unknown
-        // }else{
-        //     //console.log("person.profession",person.profession)
-        //     this.biasMetrics[person.profession].die += 1
-        //     this.biasMetrics[person.gender].die += 1
-        //     this.biasMetrics[person.charType].die += 1
-        //     // this.dieProfession.push(person.profession)
-        //     // this.diePregnant.push(person.pregnant)
-        //     // this.dieGender.push(person.gender)
-        //     // this.dieCharType.push(person.charType)
-        //     // this.dieAge.push(person.age)
-        // }
-
     }
 
 
     this.outputResults = function(){
         console.log("AGGREGATED RESULTS:")
-
-
         let sortable = []
         for (var identity in this.biasMetrics) {
-            //console.log("CCCCCCCCCCCC",identity)
-            //console.log(identity, this[identity].percentLive.toFixed(2))
             sortable.push([identity,this.biasMetrics[identity].percentLive])
         }
-        //console.log("XXXXXXXXXX",sortable)
         sortable.sort(function(a,b){
             return a[1] - b[1]
         })
-        //console.log("XXXXXXXXXXX",sortable)
         sortable.forEach(e =>{
             console.log(e[0], e[1].toFixed(2))
         })
-        // console.log("Passengers Saved:", this.passengersSaved)
-        // console.log("Pedestrians Saved", this.pedestriansSaved)
-        // console.log("Homeless saved:", this.liveProfession.count("homeless"), "Homeless died:", this.dieProfession.count("homeless"),"Percent live:", calcRatio( this.liveProfession.count("homeless"),this.dieProfession.count("homeless") ) ) 
-        // console.log("Doctors saved:", this.liveProfession.count("doctor"), "Doctors died:", this.dieProfession.count("doctor"),"Percent live:", calcRatio( this.liveProfession.count("doctor"),this.dieProfession.count("doctor") ) )
-        // console.log("Pregnant Saved:", this.livePregnant.count(true), "Pregnant Died:", this.diePregnant.count(true),"Percent live:", calcRatio( this.livePregnant.count(true),this.diePregnant.count(true) ) )
-        // console.log("Males Saved:", this.liveGender.count("male"), "Males Died:", this.dieGender.count("male"), "Percent live:", calcRatio( this.liveGender.count("male"),this.dieGender.count("male") ) )
-        // console.log("Females Saved:", this.liveGender.count("female"), "Females Died:", this.dieGender.count("female"), "Percent live:", calcRatio( this.liveGender.count("female"),this.dieGender.count("female") ) )
-        // console.log( "You Ratio:", calcRatio(this.liveCharType.count("you"),this.dieCharType.count("you")) )
-        // console.log( "Dog Ratio:", calcRatio(this.liveCharType.count("dog"),this.dieCharType.count("dog")) )
-        // console.log( "Baby Ratio:", calcRatio(this.liveAge.count("baby"),this.dieAge.count("baby")) )
-        // console.log( "Child Ratio:", calcRatio(this.liveAge.count("child"),this.dieAge.count("child")) )
-        // console.log( "Adult Ratio:", calcRatio(this.liveAge.count("adult"),this.dieAge.count("adult")) )
-        // console.log( "Elderly Ratio:", calcRatio(this.liveAge.count("elderly"),this.dieAge.count("elderly")) )
-    
     }
 
 }
-
-
-
-
 
 // Utility Functions
 function randomChoice(choices) {
@@ -471,20 +385,7 @@ function randomChoice(choices) {
     return choices[index];
 }
 
-// add a python like count method to the Javascript Array object
-Array.prototype.count = function(value) {
-    let count = 0;
-    this.forEach(item => {
-	if (item === value) {
-	    count++;
-	}
-    });
-    return count;
-}
 
-function calcRatio(live,die){
-    let ratio = live/(live + die)
-    let percent = Math.round(ratio * 100, 2)
-    return percent
-}
+
+
 
