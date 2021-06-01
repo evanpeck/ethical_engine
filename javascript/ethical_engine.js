@@ -293,22 +293,54 @@ function Audit(){
     // this.illegal = {}
     // this.sameLane = {}
     // this.otherLane = {}
-    this.pedestrians = {live:0,die:0}
-    this.passengers = {live:0,die:0}
+    this.biasMetrics = {
+        pedestrians : {live:0,die:0},
+        passengers : {live:0,die:0},
+    
+        //charType
+        human : {live:0,die:0},
+        you : {live:0,die:0},
+        dog : {live:0,die:0},
+        cat : {live:0,die:0},
+
+        //age
+        baby : {live:0,die:0},
+        child : {live:0,die:0},
+        adult : {live:0,die:0},
+        elderly : {live:0,die:0},
+    
+        //gender
+        female : {live:0,die:0},
+        male : {live:0,die:0},
+        
+        //bodyType
+        overweight : {live:0,die:0},
+        athletic : {live:0,die:0},
+        average : {live:0,die:0},
+    
+        //pregnant
+        pregnant : {live:0,die:0},
+
+        //profession
+        doctor : {live:0,die:0},
+        CEO : {live:0,die:0},
+        criminal : {live:0,die:0},
+        homeless : {live:0,die:0},
+        unemployed : {live:0,die:0},
+        unknown : {live:0,die:0},
 
 
-    this.female = {live:0,die:0}
-    this.male = {live:0,die:0}
+
+        undefined : {live:0,die:0} // this attribute aggregates data like pregnant.undefined profession.undefined etc 
     
 
-    this.doctor = {live:0,die:0}
-    this.CEO = {live:0,die:0}
-    this.criminal = {live:0,die:0}
-    this.homeless = {live:0,die:0}
-    this.unemployed = {live:0,die:0}
-    this.unknown = {live:0,die:0}
-
-    this.undefined = {live:0,die:0} // this attribute aggregates data like pregnant.undefined profession.undefined etc 
+    // person.charType: human, dog, cat 
+    // person.age: baby, child, adult, elderly 
+    // person.gender: male, female 
+    // person.bodyType: overweight, athletic, average  
+    // person.pregnant: true, false
+    // person.profession: doctor, CEO, criminal, homeless, unemployed, unknown
+    }
 
     this.simulations = 0
 
@@ -320,53 +352,75 @@ function Audit(){
                 for (x=0; x < scenario.passengers.length; x++) {
                     let person = scenario.passengers[x]
                     this.aggregateResults("live",person)
-                    this.passengers.live += 1
+                    this.biasMetrics.passengers.live += 1
                 }
                 for (x=0; x < scenario.pedestrians.length; x++) {
                     let person = scenario.pedestrians[x]
                     this.aggregateResults("die",person)
-                    this.pedestrians.die += 1
+                    this.biasMetrics.pedestrians.die += 1
                 }
             }
             else{
                 for (x=0; x < scenario.pedestrians.length; x++) {
                     let person = scenario.pedestrians[x]
                     this.aggregateResults("live",person)
-                    this.pedestrians.live += 1
+                    this.biasMetrics.pedestrians.live += 1
                 }
                 for (x=0; x < scenario.passengers.length; x++) {
                     let person = scenario.passengers[x]
                     this.aggregateResults("die",person)
-                    this.passengers.die += 1
+                    this.biasMetrics.passengers.die += 1
                 }
             }
             this.simulations = this.simulations + 1
             console.log("Simulations: ", this.simulations)
         }
-        for (var identity in this) {
+        for (var identity in this.biasMetrics) {
             //console.log("HHHHHHHHHHHHH", this[identity].live, this[identity].die)
-            this[identity].percentLive = this[identity].live / (this[identity].live + this[identity].die)
+            this.biasMetrics[identity].percentLive = this.biasMetrics[identity].live / (this.biasMetrics[identity].live + this.biasMetrics[identity].die)
             
         }
     }
 
     this.aggregateResults = function (liveDie, person){
-        if(liveDie == "live"){
-            //console.log("person.gender",person.gender)
-            this[person.profession].live += 1
-            //console.log("GGGGGGGGGGGGGGGGGGG", this['male'], this['fe'])
-            this[person.gender].live += 1
-            //console.log("BBBBBBBBBBBBBBBBBBBBBBBBBBBB", this[person.gender].live)
-        }else{
-            //console.log("person.profession",person.profession)
-            this[person.profession].die += 1
-            this[person.gender].die += 1
-            // this.dieProfession.push(person.profession)
-            // this.diePregnant.push(person.pregnant)
-            // this.dieGender.push(person.gender)
-            // this.dieCharType.push(person.charType)
-            // this.dieAge.push(person.age)
+        for (var identity in person) {
+            //console.log("HOHHOHOHOOHH:",typeof person[identity])
+            if(typeof person[identity] == "string"){
+                // run on all keys except for person.stringRep function and person.pregnant boolean
+                //console.log(person[identity])
+                this.biasMetrics[person[identity]][liveDie] += 1
+            }
+            if(typeof person[identity] == "boolean"){
+                // run on person.pregnant boolean
+                //console.log(person[identity])
+                this.biasMetrics.pregnant[liveDie] += 1
+            }
+            //this.biasMetrics[person[identity]][liveDie] += 1
         }
+        // if(liveDie == "live"){
+        //     //console.log("person.gender",person.gender)
+        //     this.biasMetrics[person.profession].live += 1
+        //     //console.log("GGGGGGGGGGGGGGGGGGG", this['male'], this['fe'])
+        //     this.biasMetrics[person.gender].live += 1
+        //     this.biasMetrics[person.charType].live += 1
+        //     //console.log("BBBBBBBBBBBBBBBBBBBBBBBBBBBB", this[person.gender].live)
+        //     // person.charType: human, dog, cat 
+        //     // person.age: baby, child, adult, elderly 
+        //     // person.gender: male, female 
+        //     // person.bodyType: overweight, athletic, average  
+        //     // person.pregnant: true, false
+        //     // person.profession: doctor, CEO, criminal, homeless, unemployed, unknown
+        // }else{
+        //     //console.log("person.profession",person.profession)
+        //     this.biasMetrics[person.profession].die += 1
+        //     this.biasMetrics[person.gender].die += 1
+        //     this.biasMetrics[person.charType].die += 1
+        //     // this.dieProfession.push(person.profession)
+        //     // this.diePregnant.push(person.pregnant)
+        //     // this.dieGender.push(person.gender)
+        //     // this.dieCharType.push(person.charType)
+        //     // this.dieAge.push(person.age)
+        // }
 
     }
 
@@ -376,23 +430,16 @@ function Audit(){
 
 
         let sortable = []
-        for (var identity in this) {
-            console.log("CCCCCCCCCCCC",identity)
-            let otherIdentifiers = {simulations:'',aggregateResults:'',outputResults:'',runSimulation:''}
-            if(identity in otherIdentifiers){
-                console.log("do nothing", identity)
-            }else
-            {
-                console.log(identity, this[identity].percentLive.toFixed(2))
-                sortable.push([identity,this[identity].percentLive])
-            }
-
+        for (var identity in this.biasMetrics) {
+            //console.log("CCCCCCCCCCCC",identity)
+            //console.log(identity, this[identity].percentLive.toFixed(2))
+            sortable.push([identity,this.biasMetrics[identity].percentLive])
         }
-        console.log("XXXXXXXXXX",sortable)
+        //console.log("XXXXXXXXXX",sortable)
         sortable.sort(function(a,b){
             return a[1] - b[1]
         })
-        console.log("XXXXXXXXXXX",sortable)
+        //console.log("XXXXXXXXXXX",sortable)
         sortable.forEach(e =>{
             console.log(e[0], e[1].toFixed(2))
         })
