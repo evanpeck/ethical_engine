@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ethical Engine</title>
+    <script src="ethical_engine.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <style>
         body{
@@ -17,12 +18,9 @@
     </style>
 </head>
 <body>
-    
-    <button type="button" id="run-once" class="btn btn-primary" >Run Ethical Engine Once</button><br>
-    <button type="button" id="run-multiple" class="btn btn-primary" >Run Audit (Runs Ethical Engine 10000 times)</button>
+    <button type="button" class="btn btn-primary" onclick="main()">Run Ethical Engine Once</button><br>
+    <button type="button" class="btn btn-primary" onclick="audit()">Run Audit (Runs Ethical Engine 10000 times)</button>
     
     <p>(View results in console)</p> 
-    <script type="module" src="main.js"></script>
-    <script type="module" src="auditor.js"></script>
 </body>
 </html>
