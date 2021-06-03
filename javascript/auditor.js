@@ -63,12 +63,6 @@ function Audit(){
             pedestrians : {live:0,die:0},
             passengers : {live:0,die:0},
         }
-        //
-    //     pedsInLaneTrue : {live:0,die:0}, // this only counts pedestrian lives and deaths 
-    //     pedsInLaneFalse : {live:0,die:0}, // this only counts pedestrian lives and deaths 
-
-
-    //     undefined : {live:0,die:0} // this attribute aggregates data like pregnant.undefined profession.undefined etc 
     },
 
     this.simulations = 0
@@ -77,15 +71,6 @@ function Audit(){
         while(this.simulations < 100){
             let scenario = new Scenario()
             let result = decide(scenario)
-
-            let pedsInLaneKey = ""
-            if (scenario.pedsInLane){
-                
-                pedsInLaneKey = "pedsInLaneTrue"
-            }else{
-
-                pedsInLaneKey = "pedsInLaneFalse"
-            }
 
             if (result == "passengers"){
                 for (let x=0; x < scenario.passengers.length; x++) {
