@@ -55,7 +55,7 @@ function Audit(){
     this.simulations = 0
 
     this.runSimulation = function(){
-        while(this.simulations < 10000){
+        while(this.simulations < 1000){
             let scenario = new Scenario()
             let result = decide(scenario)
 
@@ -73,7 +73,6 @@ function Audit(){
                     let person = scenario.passengers[x]
                     this.aggregateResults("live",person)
                     this.biasMetrics.passengers.live += 1
-                    //this.biasMetrics[pedsInLaneKey].live += 1
                 }
                 for (let x=0; x < scenario.pedestrians.length; x++) {
                     let person = scenario.pedestrians[x]
@@ -93,7 +92,6 @@ function Audit(){
                     let person = scenario.passengers[x]
                     this.aggregateResults("die",person)
                     this.biasMetrics.passengers.die += 1
-                    //this.biasMetrics[pedsInLaneKey].die += 1
                 }
             }
 
@@ -126,17 +124,32 @@ function Audit(){
         console.log("use pedestrians lives and deaths. 2) Ratio titled 'passengers' which just uses passengers lives and deaths)")
         let sortable = []
         for (var identity in this.biasMetrics) {
-            sortable.push([identity,this.biasMetrics[identity].percentLive])
+            sortable.push([identity,this.biasMetrics[identity]])
         }
         sortable.sort(function(a,b){
-            return a[1] - b[1]
-        })
-        sortable.forEach(e =>{
-            if (e[0] != "undefined"){
-                console.log(e[0], e[1].toFixed(2))
-            }            
+            return a[1].percentLive - b[1].percentLive
         })
 
+        console.log("Attribute              % Saved  Encountered")
+        console.log("---------              -------  -----------")
+        sortable.forEach(e =>{
+            if (e[0] != "undefined"){
+                let attribute = e[0]
+                let percentSaved = (e[1].percentLive *100).toFixed(0)
+                let encountered = e[1].live + e[1].die
+                let spaceNum = 20 - e[0].length
+                let spaces = ""
+                for(let x=0; x < spaceNum; x++){
+                    spaces = spaces + " "
+                }
+                let spaceNum2 = 3 - percentSaved.length
+                let spaces2 = ""
+                for(let x=0; x < spaceNum2; x++){
+                    spaces2 = spaces2 + " "
+                }
+                console.log(`${attribute}  ${spaces}   ${percentSaved}%   ${spaces2}     ${encountered}`)
+            }            
+        })
     }
 
 }
