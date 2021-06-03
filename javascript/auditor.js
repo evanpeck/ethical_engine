@@ -9,8 +9,6 @@ function audit(){
 
 function Audit(){
     this.biasMetrics = {
-        // pedestrians : {live:0,die:0},
-        // passengers : {live:0,die:0},
     
         //charType
         charType : {
@@ -93,26 +91,20 @@ function Audit(){
                 for (let x=0; x < scenario.passengers.length; x++) {
                     let person = scenario.passengers[x]
                     this.aggregateResults("live",person,"passengers")
-                    // this.biasMetrics.passengers.live += 1
                 }
                 for (let x=0; x < scenario.pedestrians.length; x++) {
                     let person = scenario.pedestrians[x]
                     this.aggregateResults("die",person,"pedestrians")
-                    // this.biasMetrics.pedestrians.die += 1
-                    // this.biasMetrics[pedsInLaneKey].die += 1
                 }
             }
             else{
                 for (let x=0; x < scenario.pedestrians.length; x++) {
                     let person = scenario.pedestrians[x]
                     this.aggregateResults("live",person,"pedestrians")
-                    // this.biasMetrics.pedestrians.live += 1
-                    // this.biasMetrics[pedsInLaneKey].live += 1
                 }
                 for (let x=0; x < scenario.passengers.length; x++) {
                     let person = scenario.passengers[x]
                     this.aggregateResults("die",person,"passengers")
-                    // this.biasMetrics.passengers.die += 1
                 }
             }
 
@@ -120,10 +112,7 @@ function Audit(){
             console.log("Simulations: ", this.simulations)
         }
         for (var attribute in this.biasMetrics) {
-            // this.biasMetrics[identity].percentLive = this.biasMetrics[identity].live / (this.biasMetrics[identity].live + this.biasMetrics[identity].die)
-            console.log("ATTTR:", attribute)
             for (var subAttr in this.biasMetrics[attribute]) {
-                console.log("RRRRRRRRRRRR:", subAttr)
                 this.biasMetrics[attribute][subAttr].percentLive = this.biasMetrics[attribute][subAttr].live / (this.biasMetrics[attribute][subAttr].live + this.biasMetrics[attribute][subAttr].die)
                 
             }
@@ -132,38 +121,24 @@ function Audit(){
 
     this.aggregateResults = function (liveDie, person, passOrPedes){
         for (var attribute in person) {
-            //console.log("attribute:", attribute)
             if(attribute != "stringRep"){
                 // run on all keys except for person.stringRep function 
                 this.biasMetrics[attribute][person[attribute]][liveDie] += 1
             }
             
         }
-        console.log("GGGGGGGGGGG",passOrPedes, this.biasMetrics.misc[passOrPedes])
         this.biasMetrics.misc[passOrPedes][liveDie] += 1
     }
 
 
     this.outputResults = function(){
         console.log("Live/Die Ratio Sorted By Most Likely To Die To Least Likely")
-        console.log("(Note: Ratios calculated using all passengers and pedestrians lives and deaths,")
-        console.log("except for: 1) Ratios titled 'pedsInLaneFalse, pedsInLaneTrue,  pedestrians' which just")
-        console.log("use pedestrians lives and deaths. 2) Ratio titled 'passengers' which just uses passengers lives and deaths)")
         let sortable = []
-        // for (var attribute in this.biasMetrics) {
-        //     // this.biasMetrics[attribute][person[attribute]][liveDie]
-        //     // sortable.push([identity,this.biasMetrics[identity]])
-        //     console.log("ZZZZZZZZZZZ", attribute)
-        //     sortable.push([attribute,this.biasMetrics[attribute][person[attribute]]])
-        // }
         for (var attribute in this.biasMetrics) {
              for (var subAttr in this.biasMetrics[attribute]) {
-                // this.biasMetrics[attribute][subAttr].percentLive = this.biasMetrics[attribute][subAttr].live / (this.biasMetrics[attribute][subAttr].live + this.biasMetrics[attribute][subAttr].die)
                 sortable.push([attribute + "=" + subAttr,this.biasMetrics[attribute][subAttr]])
             }
         }
-
-
 
         sortable.sort(function(a,b){
             return a[1].percentLive - b[1].percentLive
