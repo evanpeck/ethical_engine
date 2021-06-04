@@ -1,5 +1,5 @@
 import {decide} from './engine.js'
-import {Scenario} from './scenario.js'
+import {Scenario, Person} from './scenario.js'
 
 let scenes = []
 let sceneGlobal = {}
@@ -66,7 +66,8 @@ function readFile(event) {
       console.log(reader.result);
       let temp = reader.result
       scenes = JSON.parse(temp);
-      alert("The following number of scenarios/decisions are now ready to test:", scenes.length)
+      console.log(scenes, scenes.length)
+      alert("The following number of scenarios/decisions are now ready to test: " + scenes.length)
     };
   
     reader.onerror = function() {
@@ -82,39 +83,20 @@ function findDifferences(){
     let differences = 0;
     scenes.forEach(sceneJSON => {
 
-        // needed because sceneJSON does not contain stringRep functions
+        // begin needed because sceneJSON does not contain stringRep functions
         let target = new Scenario()
         const scene = Object.assign(target,sceneJSON)
         console.log(scene)
 
-        
+        const personInst = new Person()
         scene.passengers.forEach(p => {
-            p.stringRep = function(){
-                let readable = ''
-                readable += this.charType + " | " 
-                readable += " age:" + this.age + " | " 
-                readable += " gender:" + this.gender + " | " 
-                readable += "body-type:" + this.bodyType + " | " 
-                readable += "pregnant:" + this.pregnant + " | " 
-                readable += "profession:" + this.profession  
-                
-                return(readable)
-            }
+            p.stringRep = personInst.stringRep
         });
 
         scene.pedestrians.forEach(p => {
-            p.stringRep = function(){
-                let readable = ''
-                readable += this.charType + " | " 
-                readable += " age:" + this.age + " | " 
-                readable += " gender:" + this.gender + " | " 
-                readable += "body-type:" + this.bodyType + " | " 
-                readable += "pregnant:" + this.pregnant + " | " 
-                readable += "profession:" + this.profession  
-                
-                return(readable)
-            }
+            p.stringRep = personInst.stringRep
         });
+        // end
 
         let result = decide(scene);
         if (result != scene.decision){
@@ -130,11 +112,24 @@ function findDifferences(){
     console.log("Number of differences found:", differences)
 }
 
+function displayUpload(){
+    document.getElementById('read-file').style.display='block';
+}
+
 document.getElementById('run-once').addEventListener('click', runSimulation);
 document.getElementById('run-manual').addEventListener('click', runManualSimulation);
 document.getElementById('record-entry-passengers').addEventListener('click', recordEntry);
 document.getElementById('record-entry-pedestrians').addEventListener('click', recordEntry);
 document.getElementById('save').addEventListener('click', download_txt);
 document.getElementById('read-file').addEventListener('change', readFile);
-// document.forms['myform'].elements['myfile'].addEventListener('onchange', upload_txt);
 document.getElementById('find-differences').addEventListener('click', findDifferences);
+document.getElementById('upload').addEventListener('click', displayUpload);
+
+
+function debugMe(){
+    console.log("DDDDDDDDDDDDDDDD")
+    console.log(scenes)
+    console.log(scenes.length)
+    console.log("ZZZZZZZZZZZZZZZZZZ")
+}
+document.getElementById('debugIt').addEventListener('click', debugMe);

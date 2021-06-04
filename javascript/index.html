@@ -22,12 +22,32 @@
         }
 
         #record-entry-pedestrians,
-        #record-entry-passengers {
+        #record-entry-passengers,
+        #read-file {
             display: none;
         }
 
-        .emphasize{
+        .emphasize {
             font-weight: bold;
+            font-style: italic;
+        }
+
+        /* #upload, #save {
+            cursor: pointer;
+            color: blue;
+            text-decoration: underline;
+        } */
+
+        #upload, #save {
+            cursor: pointer;
+            color: #007bff;
+            text-decoration: none;
+            background-color: transparent;
+
+        }
+
+        blockquote{
+            margin-left: 20px;
             font-style: italic;
         }
     </style>
@@ -88,19 +108,20 @@
             The code you have to modify is the
             decide() function in the file javascript/engine.js. Write whatever code you like. But make
             sure that in all cases your function always either returns "passengers"
-            or "pedestrians". 
-        </p>   <p>   
+            or "pedestrians".
+        </p>
+        <p>
             Each time you make a modification to the engine, test your modification by clicking
             the "Run Ethical Engine Once" button. If you've got syntax errors in your code watch for
             them in the console. They will show up as <span style="color:red">messages in red text. </span> If you have
-            logic errors your engine might decide to save the passengers when you intend to save the pedestrians 
+            logic errors your engine might decide to save the passengers when you intend to save the pedestrians
             (or vice-versa.)
         </p>
     </section>
     <section>
         <h2>III.</h2>
         <p>Once you're ok with what you've coded it's time to test your code more thoroughly by automatically
-            running your engine agains 
+            running your engine agains
             10,000 scenarios. (These kinds of tests are sometimes called Monte Carlo simulations.) To run your
             this test click the below button:
 
@@ -116,11 +137,14 @@
     </section>
     <section>
         <h2>IV.</h2>
-        <p>You might think you've got things figured out pretty well after running your engine against 10,000 random scenarios 
+        <p>You might think you've got things figured out pretty well after running your engine against 10,000 random
+            scenarios
             fine tuning your engine. But how sure are you about that? Most likely there are still differences
             between what you'd like your decision engine to do and what it really does. To help reveal
-            those differences you are going to manually decide 60 scenarios <span class="emphasize">(part A)</span> and then you'll see whether your
-            decisions are the same as those that your decision engine would make <span class="emphasize">(part B)</span>. 
+            those differences you are going to manually decide 60 scenarios <span class="emphasize">(part A)</span> and
+            then you'll see whether your
+            decisions are the same as those that your decision engine would make <span class="emphasize">(part
+                B)</span>.
         </p>
         <h5>Part A.</h5>
         <p>First, manually run through 60 random scenarios and decide for yourself who should live and who should die.
@@ -131,22 +155,59 @@
         <button type="button" id="record-entry-passengers" class="btn btn-primary btn-sm">Passengers</button>
         <button type="button" id="record-entry-pedestrians" class="btn btn-primary btn-sm">Pedestrians</button>
         <span id="recorded-scenarios"></span>
-        <p>Make sure to <a href="#" id="save">save your recorded scenarios and associated decisions</a> after you've recorded 60 of them.
-        Note: Once you've recorded your decision you can immediately proceed to <span class="emphasize">(part B)</span>. But if
-        you refresh your browser you will need to <a href="#">re-upload your saved scenarios/decisions.</a>
+        <p>Make sure to <a id="save">save your recorded scenarios and associated decisions</a> after you've
+            recorded 60 of them.
+
+        <p>
+            Note: Once you've recorded your decision you can immediately proceed to <span class="emphasize">(part
+                B)</span>. But if
+            you refresh your browser you will need to <a id="upload">re-upload your saved scenarios/decisions</a>
+
+        </p>
+        <p>
+            <input class="form-control-file" type="file" id="read-file"><br>
         </p>
 
-            <input type="file" id="read-file" ><br>
-        </p>
-
-        
         <h5>Part B.</h5>
         <p>Now that you've recorded your decisions manually, let's see whether they are the same
             as the ones that your engine would make. To run the test, click the following button:
         </p>
         <button type="button" id="find-differences" class="btn btn-primary btn-sm">Find Differences</button>
+        <p>Examine the differences (if there are any).  In each case ask yourself why the engine made
+            one decision but you made another.  Was it because of a bug in your code? Or because You 
+            hadn't anticipated all the scenarios?  Consider fine-tuning your engine to address the 
+            differences.
+        </p>
+        <button id="debugIt">Debug</button>
     </section>
+    <section>
+        <h2>V.</h2>
+        <p>In this final section you are going to reflect on your experiences. </p>
+        <p>First, confer with a classmate and compare your engines.  Did you code your
+            engines the same way or differently?  What were your differences?
+        </p>
+        <p>Second, consider reading a little more about what philosophers and pundits
+            have to say about designing ethics engines and the Trolley Problem exercise.
+            Quite a few of them are listed on the <a href="https://en.wikipedia.org/wiki/Trolley_problem">trolley problem</a>
+            wikipedia page </p>
 
+        <p>Third, write a two or three page paper where you reflect on your experiences.  Tackle
+            at least three of the following questions: 
+        </p>
+        <blockquote>
+            "What principles of justice/fairness were you 
+            attempting to embody in your decision engine? How well did you succeed in embedding these
+             principles into your engine?  What (if any) compromises did you have to make?  
+             Compare your own engine to one of your classmates -- what were the merits and demerits 
+             of your engine compared to your classmates?  What are some larger lessons about the 
+             relationship between justice/fairness and the development of algorithms that you learned 
+             from doing this assignment? What did you learn in the process of testing and fine-tuning
+             your engine? What are the benefits and costs of attempting to express 
+             justice and fairness through this exercise?  Is it possible to create algorithms that are 
+             neutral?"
+        </blockquote>
+
+    </section>
 
 
     <!-- <pre id="show-manual"></pre>
