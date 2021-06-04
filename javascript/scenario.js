@@ -1,9 +1,9 @@
-function Scenario(passengers, pedestrians, youInCar, legalCrossing, pedsInLane, sameNum=true){
+function Scenario(passengers, pedestrians, youInCar, legalCrossing, pedsInLane, sameNum){
 
-    const MIN_PASSENGERS = 1
-    const MAX_PASSENGERS = 2
+    const MIN_PASSENGERS = 0
+    const MAX_PASSENGERS = 4
     const MIN_PEDESTRIANS = 1
-    const MAX_PEDESTRIANS = 2
+    const MAX_PEDESTRIANS = 4
 
     const YOU_CHANCE = [true, false, false, false]
     const LEGAL_CROSSING_CHANCE = [true, true, false]

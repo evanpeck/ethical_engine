@@ -29,7 +29,6 @@ function runManualSimulation(){
 }
 
 function recordEntry(event){
-    // console.log(event.srcElement.id)
     if (event.srcElement.id == "record-entry-passengers"){
         sceneGlobal.decision = "passengers"
     }else{
@@ -37,7 +36,6 @@ function recordEntry(event){
     }
     scenes.push(sceneGlobal)
     runManualSimulation()
-    // console.log(scenes)
     recordedScenarios()
 }
 
@@ -63,10 +61,8 @@ function readFile(event) {
     reader.readAsText(file);
   
     reader.onload = function() {
-      console.log(reader.result);
       let temp = reader.result
       scenes = JSON.parse(temp);
-      console.log(scenes, scenes.length)
       alert("The following number of scenarios/decisions are now ready to test: " + scenes.length)
     };
   
@@ -86,7 +82,6 @@ function findDifferences(){
         // begin needed because sceneJSON does not contain stringRep functions
         let target = new Scenario()
         const scene = Object.assign(target,sceneJSON)
-        console.log(scene)
 
         const personInst = new Person()
         scene.passengers.forEach(p => {
