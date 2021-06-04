@@ -126,10 +126,3 @@ document.getElementById('find-differences').addEventListener('click', findDiffer
 document.getElementById('upload').addEventListener('click', displayUpload);
 
 
-function debugMe(){
-    console.log("DDDDDDDDDDDDDDDD")
-    console.log(scenes)
-    console.log(scenes.length)
-    console.log("ZZZZZZZZZZZZZZZZZZ")
-}
-document.getElementById('debugIt').addEventListener('click', debugMe);
