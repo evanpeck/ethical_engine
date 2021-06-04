@@ -1,9 +1,9 @@
-function Scenario(passengers, pedestrians, youInCar, legalCrossing, pedsInLane, sameNum=false){
+function Scenario(passengers, pedestrians, youInCar, legalCrossing, pedsInLane, sameNum=true){
 
     const MIN_PASSENGERS = 1
-    const MAX_PASSENGERS = 7
+    const MAX_PASSENGERS = 2
     const MIN_PEDESTRIANS = 1
-    const MAX_PEDESTRIANS = 7
+    const MAX_PEDESTRIANS = 2
 
     const YOU_CHANCE = [true, false, false, false]
     const LEGAL_CROSSING_CHANCE = [true, true, false]
@@ -36,11 +36,11 @@ function Scenario(passengers, pedestrians, youInCar, legalCrossing, pedsInLane, 
         // If you are a passenger in the car, replace one of the passengers wih you.
         // 25% chance of you being in car
         if (typeof youInCar != 'undefined'){
-            self.youInCar = youInCar
+            this.youInCar = youInCar
         }else{
-            self.youInCar = randomChoice(YOU_CHANCE)
+            this.youInCar = randomChoice(YOU_CHANCE)
         }
-        if (self.youInCar){
+        if (this.youInCar){
             // Feel free to change these attributes if you'd like
             let youPerson = new Person("you")
             if (numPassengers > 0){
@@ -164,4 +164,4 @@ function randomChoice(choices) {
     return choices[index];
 }
 
-export {Scenario};
+export {Scenario, Person};

@@ -1,28 +1,158 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ethical Engine</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <style>
-        body{
-            text-align: center;
-            margin: 100px;
+        body {
+            margin: 10px;
         }
-        button{
-            margin: 20px;
+
+        button {
+            margin: 5px;
+        }
+
+        pre {
+            font-size: .8em;
+        }
+
+        #record-entry-pedestrians,
+        #record-entry-passengers {
+            display: none;
+        }
+
+        .emphasize{
+            font-weight: bold;
+            font-style: italic;
         }
     </style>
 </head>
+
 <body>
-    
-    <button type="button" id="run-once" class="btn btn-primary" >Run Ethical Engine Once</button><br>
-    <button type="button" id="run-multiple" class="btn btn-primary" >Run Audit (Runs Ethical Engine 10000 times)</button>
-    
-    <p>(View results in console)</p> 
+    <header>
+        <h1>Ethical Engine Lab</h1>
+        <p>
+            In this assignment you will be creating an algorithm that will help a self-driving car make
+            driving decisions that have mortal consequences. The assignment is based on a classic philosophical
+            exercise called the <a href="https://en.wikipedia.org/wiki/Trolley_problem">trolley problem</a>.
+        </p>
+        <p>
+            The assignment helps hone your conditional programming skills and your testing skills. It also challenges
+            you to make ethical decisions and embed them in your algorithm. Follow the below steps to complete the
+            assignment.
+
+        </p>
+    </header>
+    <section>
+        <h2>I.</h2>
+        <p>First, all of these steps require you to <a href="https://balsamiq.com/support/faqs/browserconsole/">open
+                your browser's console</a>. I also
+            recommend you <a href="https://developer.chrome.com/docs/devtools/customize/placement/">dock the console on
+                the right.</a>
+            Now run the ethical engine by clicking the below button:</p>
+
+        <button type="button" id="run-once" class="btn btn-primary btn-sm">Run Ethical Engine Once</button><br>
+
+
+        <p>
+            The console will display a scenario with a list of passengers (who are in an autonomous car)
+            and a list of pedestrians (who are
+            crossing the street in front of the car). The car only has two choices. It can run into a concrete barrier
+            that will kill
+            the passengers, or it can avoid the concrete barrier and run over the pedestrians thereby killing them.
+        </p>
+        <p>
+            The ethical engine is pre-coded to make an instantaneous decision. Depending on the scenario will either
+            elect to save the passengers or
+            the pedestrians. You can see that decision displayed
+            at the bottom of the scenario <span style="background-color: red;">in red.</span>
+        </p>
+        <p>
+            Click the "Run Ethical Engine Once" button a few more times to see random scenarios and which group of
+            people
+            the engine decides to save.
+
+        </p>
+
+    </section>
+    <section>
+        <h2>II.</h2>
+        <p>Now it's your turn to code the ethical engine!
+        </p>
+        <p>
+            The code you have to modify is the
+            decide() function in the file javascript/engine.js. Write whatever code you like. But make
+            sure that in all cases your function always either returns "passengers"
+            or "pedestrians". 
+        </p>   <p>   
+            Each time you make a modification to the engine, test your modification by clicking
+            the "Run Ethical Engine Once" button. If you've got syntax errors in your code watch for
+            them in the console. They will show up as <span style="color:red">messages in red text. </span> If you have
+            logic errors your engine might decide to save the passengers when you intend to save the pedestrians 
+            (or vice-versa.)
+        </p>
+    </section>
+    <section>
+        <h2>III.</h2>
+        <p>Once you're ok with what you've coded it's time to test your code more thoroughly by automatically
+            running your engine agains 
+            10,000 scenarios. (These kinds of tests are sometimes called Monte Carlo simulations.) To run your
+            this test click the below button:
+
+        </p>
+        <button type="button" id="run-multiple" class="btn btn-primary btn-sm">Run Audit (Runs Ethical Engine 10000
+            times)</button>
+        <p>
+            Notice the output from the simulation. It provides you with a statistical
+            breakdown of what type of people are advantaged (and disadvantaged) by your decision engine.
+            Do the statistics favor the people/animals you wanted to favor? Do they reflect what you think is just
+            and/or equitable? If not, you might want to go back and fine-tune your ethical engine.
+        </p>
+    </section>
+    <section>
+        <h2>IV.</h2>
+        <p>You might think you've got things figured out pretty well after running your engine against 10,000 random scenarios 
+            fine tuning your engine. But how sure are you about that? Most likely there are still differences
+            between what you'd like your decision engine to do and what it really does. To help reveal
+            those differences you are going to manually decide 60 scenarios <span class="emphasize">(part A)</span> and then you'll see whether your
+            decisions are the same as those that your decision engine would make <span class="emphasize">(part B)</span>. 
+        </p>
+        <h5>Part A.</h5>
+        <p>First, manually run through 60 random scenarios and decide for yourself who should live and who should die.
+            The exercise will cache your decisions (don't worry, they aren't stored permanently). To run the manual test
+            click on the following button and follow the prompts:
+        </p>
+        <button type="button" id="run-manual" class="btn btn-primary btn-sm">Run Manual Tests</button>
+        <button type="button" id="record-entry-passengers" class="btn btn-primary btn-sm">Passengers</button>
+        <button type="button" id="record-entry-pedestrians" class="btn btn-primary btn-sm">Pedestrians</button>
+        <span id="recorded-scenarios"></span>
+        <p>Make sure to <a href="#" id="save">save your recorded scenarios and associated decisions</a> after you've recorded 60 of them.
+        Note: Once you've recorded your decision you can immediately proceed to <span class="emphasize">(part B)</span>. But if
+        you refresh your browser you will need to <a href="#">re-upload your saved scenarios/decisions.</a>
+        </p>
+
+            <input type="file" id="read-file" ><br>
+        </p>
+
+        
+        <h5>Part B.</h5>
+        <p>Now that you've recorded your decisions manually, let's see whether they are the same
+            as the ones that your engine would make. To run the test, click the following button:
+        </p>
+        <button type="button" id="find-differences" class="btn btn-primary btn-sm">Find Differences</button>
+    </section>
+
+
+
+    <!-- <pre id="show-manual"></pre>
+    <p>(View results in console)</p> -->
     <script type="module" src="main.js"></script>
     <script type="module" src="auditor.js"></script>
 </body>
+
 </html>

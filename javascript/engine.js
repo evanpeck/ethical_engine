@@ -2,8 +2,7 @@
 
 
 function decide(scenario){
-
-    //Properties you have access to in scenario:
+    // Properties you have access to in scenario:
     // scenario.pedsInLane (if true pedestrians are in same lane as car)
     // scenarion.legalCrossing (if true pedestrians are crossing legally)
     // scenario.passengers and scenario.pedestrians (arrays of person objects)
