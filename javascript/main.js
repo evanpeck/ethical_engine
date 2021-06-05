@@ -17,9 +17,11 @@ function runSimulation(event){
     } else {
         // the user manually makes the decision:
         sceneGlobal = scene;
-        document.getElementById('run-manual').style.display = 'none'
-        document.getElementById('record-entry-passengers').style.display = 'inline-block'
-        document.getElementById('record-entry-pedestrians').style.display = 'inline-block'
+        document.getElementById('run-manual').disabled = true
+        document.getElementById('record-entry-passengers').disabled = false
+        document.getElementById('record-entry-pedestrians').disabled = false
+        document.getElementById('download-decisions').disabled = false
+        document.getElementById('record-entry-pedestrians').disabled = false
         console.log("Who should live and who should die? Click the 'Passengers' or 'Pedestrians' button to record your decision")
     }
 }
@@ -39,7 +41,7 @@ function download_txt() {
     let hiddenElement = document.createElement('a');
     hiddenElement.href = 'data:attachment/text,' + encodeURI(JSON.stringify(scenesGlobal));
     hiddenElement.target = '_blank';
-    hiddenElement.download = 'myFile.txt';
+    hiddenElement.download = 'Decisions.txt';
     hiddenElement.click();
 }
 
@@ -101,9 +103,9 @@ document.getElementById('run-once').addEventListener('click', runSimulation);
 document.getElementById('run-manual').addEventListener('click', runSimulation);
 document.getElementById('record-entry-passengers').addEventListener('click', recordUserDecision);
 document.getElementById('record-entry-pedestrians').addEventListener('click', recordUserDecision);
-document.getElementById('save').addEventListener('click', download_txt);
+document.getElementById('download-decisions').addEventListener('click', download_txt);
 document.getElementById('read-file').addEventListener('change', readFile);
 document.getElementById('find-differences').addEventListener('click', findDifferences);
-document.getElementById('upload').addEventListener('click', displayUpload);
+
 
 

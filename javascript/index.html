@@ -8,61 +8,22 @@
     <title>Ethical Engine</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <style>
-        body {
-            margin: 10px;
-        }
-
-        button {
-            margin: 5px;
-        }
-
-        pre {
-            font-size: .8em;
-        }
-
-        #record-entry-pedestrians,
-        #record-entry-passengers,
-        #read-file {
-            display: none;
-        }
-
-        .emphasize {
-            font-weight: bold;
-            font-style: italic;
-        }
-
-        /* #upload, #save {
-            cursor: pointer;
-            color: blue;
-            text-decoration: underline;
-        } */
-
-        #upload, #save {
-            cursor: pointer;
-            color: #007bff;
-            text-decoration: none;
-            background-color: transparent;
-
-        }
-
-        blockquote{
-            margin-left: 20px;
-            font-style: italic;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">    
 </head>
 
 <body>
     <header>
         <h1>Ethical Engine Lab</h1>
         <p>
-            In this assignment you will be creating an algorithm that will help a self-driving car make
-            driving decisions that have mortal consequences. The assignment is based on a classic philosophical
-            exercise called the <a href="https://en.wikipedia.org/wiki/Trolley_problem">trolley problem</a>.
+            In this assignment you will be creating an algorithm that will be used in an imaginary driverless
+            car.  The car is presented with scenarios where it has to make decisions that have mortal consequences.  
+            The assignment is based on a classic philosophical
+            exercise called the <a href="https://en.wikipedia.org/wiki/Trolley_problem">trolley problem</a> and ethics engines created 
+            by Professors <a href="https://medium.com/bucknell-hci/the-ethical-engine-integrating-ethical-design-into-intro-to-computer-science-4f9874e756af">Evan Peck.</a>
+            and <a href="https://howtostartacsdept.wordpress.com/2018/01/13/step-86-write-up-the-ethical-engine-lab/">Justin Li</a>
         </p>
         <p>
-            The assignment helps hone your conditional programming skills and your testing skills. It also challenges
+            The assignment hones your conditional programming skills and your testing skills. It also challenges
             you to make ethical decisions and embed them in your algorithm. Follow the below steps to complete the
             assignment.
 
@@ -70,8 +31,8 @@
     </header>
     <section>
         <h2>I.</h2>
-        <p>First, all of these steps require you to <a href="https://balsamiq.com/support/faqs/browserconsole/">open
-                your browser's console</a>. Now run the ethical engine by clicking the below button:</p>
+        <p>First, <a href="https://balsamiq.com/support/faqs/browserconsole/">open
+                your browser's console</a> and then run the ethical engine by clicking the below button:</p>
 
         <button type="button" id="run-once" class="btn btn-primary btn-sm">Run Ethical Engine Once</button><br>
 
@@ -81,18 +42,17 @@
             and a list of pedestrians (who are
             crossing the street in front of the car). The car only has two choices. It can run into a concrete barrier
             that will kill
-            the passengers, or it can avoid the concrete barrier and run over the pedestrians thereby killing them.
+            the passengers, or it can avoid the concrete barrier and kill the pedestrians instead.
         </p>
         <p>
-            The ethical engine is pre-coded to make an instantaneous decision. Depending on the scenario will either
+            The ethical engine is pre-coded to make an instantaneous decision. Depending on the scenario, it will either
             elect to save the passengers or
             the pedestrians. You can see that decision displayed
             at the bottom of the scenario <span style="background-color: red;">in red.</span>
         </p>
         <p>
-            Click the "Run Ethical Engine Once" button a few more times to see random scenarios and which group of
-            people
-            the engine decides to save.
+            Click the "Run Ethical Engine Once" button a few more times to see more random scenarios and the decisions
+            the ethical engine makes.
 
         </p>
 
@@ -110,17 +70,18 @@
         <p>
             Each time you make a modification to the engine, test your modification by clicking
             the "Run Ethical Engine Once" button. If you've got syntax errors in your code watch for
-            them in the console. They will show up as <span style="color:red">messages in red text. </span> If you have
-            logic errors your engine might decide to save the passengers when you intend to save the pedestrians
-            (or vice-versa.)
+            them in the console. If you have
+            logic errors your engine might decide to save passengers when you are really intending to save pedestrians
+            (or vice-versa).  Make modifications/tweaks to your engine based on what you see outputted
+            to the console.
         </p>
     </section>
     <section>
         <h2>III.</h2>
-        <p>Once you're ok with what you've coded it's time to test your code more thoroughly by automatically
-            running your engine agains
-            10,000 scenarios. (These kinds of tests are sometimes called Monte Carlo simulations.) To run your
-            this test click the below button:
+        <p>Once you're ok with what you've coded it's time to test your code more thoroughly by 
+            running your engine against
+            10,000 automatically created scenarios. (These kinds of tests are sometimes called Monte Carlo simulations.) 
+            To run your test, click the below button:
 
         </p>
         <button type="button" id="run-multiple" class="btn btn-primary btn-sm">Run Audit (Runs Ethical Engine 10000
@@ -145,25 +106,44 @@
         </p>
         <h5>Part A.</h5>
         <p>First, manually run through 20 random scenarios and decide for yourself who should live and who should die.
-            The exercise will cache your decisions (don't worry, they aren't stored permanently). To run through the
-            manual scenarios click on the below button and follow the prompts in the console:
+            As you make decisions the program will cache your answers (don't worry, they aren't stored permanently). 
         </p>
-        <button type="button" id="run-manual" class="btn btn-primary btn-sm">Run Manual Tests</button>
-        <button type="button" id="record-entry-passengers" class="btn btn-primary btn-sm">Passengers</button>
-        <button type="button" id="record-entry-pedestrians" class="btn btn-primary btn-sm">Pedestrians</button>
-        <span id="recorded-scenarios"></span>
-        <p>Make sure to <a id="save">save your recorded scenarios and associated decisions</a> after you've
-            recorded at least 20 of them.
+        <ol>
+            <li>
+        
+                To begin, click this button<button type="button" id="run-manual" class="btn btn-primary btn-sm">Run Manual
+                    Tests</button>
+            </li>
+            <li>
+                <p>Next, read the scenarios in the console and decide whether to save passengers or pedestrians:
+                </p>
+                <p>
+                <button type="button" disabled id="record-entry-passengers" class="btn btn-primary btn-sm">Passengers</button>
+                <button type="button" disabled id="record-entry-pedestrians" class="btn btn-primary btn-sm">Pedestrians</button>
+                <span id="recorded-scenarios"></span>
+                </p>
+            </li>
+        
+            <li><p>Make sure to download a copy of your scenarios/decisions after you've
+                recorded at least 20 of them.</p>
+                <p>
+                    <button type="button" disabled id="download-decisions" class="btn btn-primary btn-sm">Download Decisions</button>
+                </p>
+                
+                
+            </li>
+            <li><p>
+                Once you've recorded and downloaded your decisions you can immediately proceed to <span class="emphasize">(part
+                B)</span>. But if you refresh your browser, you will need to re-upload your saved scenarios/decisions:
+        
+                </p>
+                <p>
+                    <input class="form-control-file" type="file" id="read-file" ><br>
+                </p>
+            </li>
+        </ol>
 
-        <p>
-            Note: Once you've recorded your decisions you can immediately proceed to <span class="emphasize">(part
-                B)</span>. But if
-            you refresh your browser you will need to <a id="upload">re-upload your saved scenarios/decisions</a>
 
-        </p>
-        <p>
-            <input class="form-control-file" type="file" id="read-file"><br>
-        </p>
 
         <h5>Part B.</h5>
         <p>Now that you've recorded your decisions manually, let's see whether they are the same
@@ -188,7 +168,7 @@
             Quite a few of them are listed on the <a href="https://en.wikipedia.org/wiki/Trolley_problem">trolley problem</a>
             wikipedia page </p>
 
-        <p>Third, write a two or three page paper where you reflect on your experiences.  Tackle
+        <p>Third, write a two to three page paper where you reflect on your experiences.  Tackle
             at least three of the following questions: 
         </p>
         <blockquote>
