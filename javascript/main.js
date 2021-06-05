@@ -13,7 +13,7 @@ function runSimulation(event){
     if(event.srcElement.id == "run-once"){
         // the ethical engine makes the decision: 
         const result = decide(scene)
-        console.log(`%cI chose to save the ${result},`,  "background: red; color: white")
+        console.log(`%cThe ethics engine chose to save the ${result},`,  "background: red; color: white")
     } else {
         // the user manually makes the decision:
         sceneGlobal = scene;
