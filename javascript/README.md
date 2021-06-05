@@ -22,13 +22,3 @@ that reveals who the engine advantages and disadvantages.
 that the engine would make.  
 - Compare their engine to fellow student's engines
 - Write a 2 to 3 page reflection paper that addresses some of the following questions: "What principles of justice/fairness were you attempting to embody in your decision engine? How well did you succeed in embedding these principles into your engine?  What (if any) compromises did you have to make?  Compare your own engine to one of your classmates -- what were the merits and demerits of your engine compared to your classmates?  What are some larger lessons about the relationship between justice/fairness and the development of algorithms that you learned from doing this assignment? What are the benefits and costs of attempting to express justice and fairness through this exercise?  Is it possible to create algorithms that are neutral?"  
-
-
-
-
-# Notes Part 2
-
-- After creating their decision engines, students should:
-   - Audit their code using the auditing tool (if their decision engine works they should be able to run it simply by clicking on the "Run Audit" button in their browser)
-   - Exchange their engine with two other classmates and audit their classmate's engines
-   - Write a short essay where they reflect on the coding and auditing experience.  In particular students should address the following questions:  "What principles of justice/fairness were you attempting to embody in your decision engine? How well did you succeed in embedding these principles into your engine?  What (if any) compromises did you have to make?  Compare your own engine to one of your classmates -- what were the merits and demerits of your engine compared to your classmates?  What are some larger lessons about the relationship between justice/fairness and the development of algorithms that you learned from doing this assignment? What are the benefits and costs of attempting to express justice and fairness through this exercise?  Is it possible to create algorithms that are neutral?"
