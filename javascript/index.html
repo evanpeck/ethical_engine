@@ -71,10 +71,7 @@
     <section>
         <h2>I.</h2>
         <p>First, all of these steps require you to <a href="https://balsamiq.com/support/faqs/browserconsole/">open
-                your browser's console</a>. I also
-            recommend you <a href="https://developer.chrome.com/docs/devtools/customize/placement/">dock the console on
-                the right.</a>
-            Now run the ethical engine by clicking the below button:</p>
+                your browser's console</a>. Now run the ethical engine by clicking the below button:</p>
 
         <button type="button" id="run-once" class="btn btn-primary btn-sm">Run Ethical Engine Once</button><br>
 
@@ -141,25 +138,25 @@
             scenarios
             fine tuning your engine. But how sure are you about that? Most likely there are still differences
             between what you'd like your decision engine to do and what it really does. To help reveal
-            those differences you are going to manually decide 60 scenarios <span class="emphasize">(part A)</span> and
+            those differences you are going to manually decide 20 scenarios <span class="emphasize">(part A)</span> and
             then you'll see whether your
             decisions are the same as those that your decision engine would make <span class="emphasize">(part
                 B)</span>.
         </p>
         <h5>Part A.</h5>
-        <p>First, manually run through 60 random scenarios and decide for yourself who should live and who should die.
-            The exercise will cache your decisions (don't worry, they aren't stored permanently). To run the manual test
-            click on the following button and follow the prompts:
+        <p>First, manually run through 20 random scenarios and decide for yourself who should live and who should die.
+            The exercise will cache your decisions (don't worry, they aren't stored permanently). To run through the
+            manual scenarios click on the below button and follow the prompts in the console:
         </p>
         <button type="button" id="run-manual" class="btn btn-primary btn-sm">Run Manual Tests</button>
         <button type="button" id="record-entry-passengers" class="btn btn-primary btn-sm">Passengers</button>
         <button type="button" id="record-entry-pedestrians" class="btn btn-primary btn-sm">Pedestrians</button>
         <span id="recorded-scenarios"></span>
         <p>Make sure to <a id="save">save your recorded scenarios and associated decisions</a> after you've
-            recorded 60 of them.
+            recorded at least 20 of them.
 
         <p>
-            Note: Once you've recorded your decision you can immediately proceed to <span class="emphasize">(part
+            Note: Once you've recorded your decisions you can immediately proceed to <span class="emphasize">(part
                 B)</span>. But if
             you refresh your browser you will need to <a id="upload">re-upload your saved scenarios/decisions</a>
 
@@ -170,7 +167,7 @@
 
         <h5>Part B.</h5>
         <p>Now that you've recorded your decisions manually, let's see whether they are the same
-            as the ones that your engine would make. To run the test, click the following button:
+            as the ones that your engine would make. To see the differences, click the following button:
         </p>
         <button type="button" id="find-differences" class="btn btn-primary btn-sm">Find Differences</button>
         <p>Examine the differences (if there are any).  In each case ask yourself why the engine made

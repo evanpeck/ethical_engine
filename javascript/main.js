@@ -1,83 +1,69 @@
 import {decide} from './engine.js'
 import {Scenario, Person} from './scenario.js'
 
-let scenes = []
+let scenesGlobal = []
 let sceneGlobal = {}
 
-
-function runSimulation(){
+function runSimulation(event){
     console.log("===========================================")
     console.log("THE ETHICAL ENGINE")
     console.log("===========================================")
     const scene = new Scenario()
     console.log(scene.stringRep())
-    const result = decide(scene)
-    console.log(`%cI chose to save the ${result},`,  "background: red; color: white")
+    if(event.srcElement.id == "run-once"){
+        // the ethical engine makes the decision: 
+        const result = decide(scene)
+        console.log(`%cI chose to save the ${result},`,  "background: red; color: white")
+    } else {
+        // the user manually makes the decision:
+        sceneGlobal = scene;
+        document.getElementById('run-manual').style.display = 'none'
+        document.getElementById('record-entry-passengers').style.display = 'inline-block'
+        document.getElementById('record-entry-pedestrians').style.display = 'inline-block'
+        console.log("Who should live and who should die? Click the 'Passengers' or 'Pedestrians' button to record your decision")
+    }
 }
 
-function runManualSimulation(){
-    console.log("===========================================")
-    console.log("THE ETHICAL ENGINE - Manual Simulation")
-    console.log("===========================================")
-    const scene = new Scenario()
-    console.log(scene.stringRep())
-    sceneGlobal = scene;
-    document.getElementById('run-manual').style.display = 'none'
-    document.getElementById('record-entry-passengers').style.display = 'inline-block'
-    document.getElementById('record-entry-pedestrians').style.display = 'inline-block'
-    console.log("Who should live and who should die? Click the 'Passengers' or 'Pedestrians' button to record your decision")
-}
-
-function recordEntry(event){
+function recordUserDecision(event){
     if (event.srcElement.id == "record-entry-passengers"){
         sceneGlobal.decision = "passengers"
     }else{
         sceneGlobal.decision = "pedestrians"
     }
-    scenes.push(sceneGlobal)
-    runManualSimulation()
-    recordedScenarios()
-}
-
-function recordedScenarios(){
-    document.getElementById('recorded-scenarios').innerHTML="Recorded scenarios: <span style='color: blue; font-size: 1.5em'>" + scenes.length + "</span>";
+    scenesGlobal.push(sceneGlobal)
+    runSimulation(event)
+    document.getElementById('recorded-scenarios').innerHTML="Recorded scenarios: <span style='color: blue; font-size: 1.5em'>" + scenesGlobal.length + "</span>";
 }
 
 function download_txt() {
-    var hiddenElement = document.createElement('a');
-    hiddenElement.href = 'data:attachment/text,' + encodeURI(JSON.stringify(scenes));
+    let hiddenElement = document.createElement('a');
+    hiddenElement.href = 'data:attachment/text,' + encodeURI(JSON.stringify(scenesGlobal));
     hiddenElement.target = '_blank';
     hiddenElement.download = 'myFile.txt';
     hiddenElement.click();
 }
 
-
 function readFile(event) {
     let input = event.target;
     let file = input.files[0];
-  
     let reader = new FileReader();
   
     reader.readAsText(file);
   
     reader.onload = function() {
-      let temp = reader.result
-      scenes = JSON.parse(temp);
-      alert("The following number of scenarios/decisions are now ready to test: " + scenes.length)
+      scenesGlobal = JSON.parse(reader.result);
+      alert("The following number of scenarios/decisions are now ready to test: " + scenesGlobal.length)
     };
   
     reader.onerror = function() {
       console.log(reader.error);
     };
-  
-  }
-
-
+}
 
 function findDifferences(){
     
     let differences = 0;
-    scenes.forEach(sceneJSON => {
+    scenesGlobal.forEach(sceneJSON => {
 
         // begin needed because sceneJSON does not contain stringRep functions
         let target = new Scenario()
@@ -112,9 +98,9 @@ function displayUpload(){
 }
 
 document.getElementById('run-once').addEventListener('click', runSimulation);
-document.getElementById('run-manual').addEventListener('click', runManualSimulation);
-document.getElementById('record-entry-passengers').addEventListener('click', recordEntry);
-document.getElementById('record-entry-pedestrians').addEventListener('click', recordEntry);
+document.getElementById('run-manual').addEventListener('click', runSimulation);
+document.getElementById('record-entry-passengers').addEventListener('click', recordUserDecision);
+document.getElementById('record-entry-pedestrians').addEventListener('click', recordUserDecision);
 document.getElementById('save').addEventListener('click', download_txt);
 document.getElementById('read-file').addEventListener('change', readFile);
 document.getElementById('find-differences').addEventListener('click', findDifferences);
