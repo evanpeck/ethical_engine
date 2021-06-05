@@ -19,3 +19,7 @@ blockquote{
     margin-left: 20px;
     font-style: italic;
 }
+
+#appendix p, #appendix div{
+    font-size: .9em;
+}
