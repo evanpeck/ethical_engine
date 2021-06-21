@@ -107,5 +107,5 @@ document.getElementById('download-decisions').addEventListener('click', download
 document.getElementById('read-file').addEventListener('change', readFile);
 document.getElementById('find-differences').addEventListener('click', findDifferences);
 
-
+export {scenesGlobal}
 

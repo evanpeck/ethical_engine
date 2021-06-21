@@ -1,9 +1,16 @@
 import {decide} from './engine.js'
 import {Scenario} from './scenario.js'
+import {scenesGlobal} from './main.js'
 
 function audit(){
     let auditMe = new Audit()
-    auditMe.runSimulation()
+    auditMe.runAudit('montecarlo')
+    auditMe.outputResults()
+}
+
+function auditManualDecisions(){
+    let auditMe = new Audit()
+    auditMe.runAudit('manualDecisions')
     auditMe.outputResults()
 }
 
@@ -65,12 +72,32 @@ function Audit(){
         }
     },
 
-    this.simulations = 0
+    this.scenarioCount = 0,
+    this.auditNotDone = true,
 
-    this.runSimulation = function(){
-        while(this.simulations < 100){
-            let scenario = new Scenario()
-            let result = decide(scenario)
+    this.runAudit = function(auditType){
+        const scenesGlobalClone = [...scenesGlobal];
+        console.log("DDDDDDDDDDDDD")
+        console.log(scenesGlobalClone.length)
+        console.log(scenesGlobalClone)
+        if(auditType == 'manualDecisions'){
+            if(scenesGlobalClone.length == 0){
+                alert('You dont have any manual decisions to audit. Create some or upload a file.')
+                return false
+            }
+        }
+        while(this.auditNotDone){
+            let scenario = {}
+            let result = ""
+
+            if (auditType == 'montecarlo'){
+                scenario = new Scenario()
+                result = decide(scenario)
+            } else {
+                scenario = scenesGlobalClone.pop()
+                result = scenario.decision
+            }
+
 
             if (result == "passengers"){
                 for (let x=0; x < scenario.passengers.length; x++) {
@@ -93,8 +120,15 @@ function Audit(){
                 }
             }
 
-            this.simulations = this.simulations + 1
-            console.log("Simulations: ", this.simulations)
+            this.scenarioCount = this.scenarioCount + 1
+            console.log("Scenarios: ", this.scenarioCount)
+            if(auditType == "montecarlo"){
+                this.auditNotDone = this.scenarioCount < 100 ? true : false
+            }else{
+                this.auditNotDone = scenesGlobalClone.length > 0 ? true : false
+            }
+
+
         }
         for (var attribute in this.biasMetrics) {
             for (var subAttr in this.biasMetrics[attribute]) {
@@ -154,3 +188,4 @@ function Audit(){
 }
 
 document.getElementById('run-multiple').addEventListener('click', audit);
+document.getElementById('audit-manual-decisions').addEventListener('click', auditManualDecisions);
