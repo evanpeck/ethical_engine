@@ -2,7 +2,7 @@
 
 This documentation will help you implement your decision engine for an autonomous vehicle.
 
-Fill in the `decide` method with a program that analyzes the given scenario and returns a string to indicate which group to save: "passengers" or "pedestrians". See below for the data available in each scenario.
+In engine.py fill in the `decide` method with a program that analyzes the given scenario and returns a string to indicate which group to save: "passengers" or "pedestrians". See below for the data available in each scenario.
 
 ## Scenario Information
 

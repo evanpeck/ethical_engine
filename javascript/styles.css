@@ -1,0 +1,25 @@
+body {
+    margin: 10px;
+}
+
+button {
+    margin: 5px;
+}
+
+pre {
+    font-size: .8em;
+}
+
+.emphasize {
+    font-weight: bold;
+    font-style: italic;
+}
+
+blockquote{
+    margin-left: 20px;
+    font-style: italic;
+}
+
+#appendix p, #appendix div{
+    font-size: .9em;
+}

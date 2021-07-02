@@ -130,7 +130,7 @@ class Person():
 
     Attributes:
         charType (string): 'human', 'you', 'cat', 'dog'
-        age (string): humans can be a 'baby', 'child', or 'adult'
+        age (string): humans can be a 'baby', 'child', 'adult' or 'elderly'
         profession (string): adults are assigned a profession: 'doctor', 'CEO',
             'criminal', 'homeless', 'unemployed', 'unknown'
         gender (string): 'male' or 'female' TODO: add more diverse options
@@ -156,6 +156,7 @@ class Person():
     GENDER_TYPES = ["male", "female"]
     # Select whether a female is pregnant (currently 25% chance)
     PREGNANT_CHANCE = [True, False, False, False]
+    # PREGNANT_CHANCE = [True, True, True, True]
     # Select the bodytype of each non-child.
     BODYWEIGHT_CHANCE = ["overweight", "athletic", "average", "average"]
 

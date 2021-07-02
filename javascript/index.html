@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ethical Engine</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles.css">    
+</head>
+
+<body>
+    <header>
+        <h1>Ethical Engine Lab</h1>
+        <p>
+            In this assignment you will be creating an algorithm that will be used in an imaginary driverless
+            car.  The car is presented with scenarios where it has to make decisions that have mortal consequences.  
+            The assignment is based on a classic philosophical
+            exercise called the <a href="https://en.wikipedia.org/wiki/Trolley_problem">trolley problem</a> and ethics engines created 
+            by Professors <a href="https://medium.com/bucknell-hci/the-ethical-engine-integrating-ethical-design-into-intro-to-computer-science-4f9874e756af">Evan Peck.</a>
+            and <a href="https://howtostartacsdept.wordpress.com/2018/01/13/step-86-write-up-the-ethical-engine-lab/">Justin Li</a>.
+            (See the <a href="#appendix">appendix</a> for more details)
+        </p>
+        <p>
+            The assignment hones your conditional programming skills and your testing skills. It also challenges
+            you to make ethical decisions and embed them in your algorithm. Follow the below steps to complete the
+            assignment.
+
+        </p>
+    </header>
+    <section>
+        <h2>I. Kick The Tires</h2>
+        <p>First, <a href="https://balsamiq.com/support/faqs/browserconsole/">open
+                your browser's console</a> and then run the ethical engine by clicking the below button:</p>
+
+        <button type="button" id="run-once" class="btn btn-primary btn-sm">Run Ethical Engine Once</button><br>
+
+
+        <p>
+            The console will display a scenario with a list of passengers (who are in an autonomous car)
+            and a list of pedestrians (who are
+            crossing the street in front of the car). The car only has two choices. It can run into a concrete barrier
+            that will kill
+            the passengers, or it can avoid the concrete barrier and kill the pedestrians instead.
+        </p>
+        <p>
+            The ethical engine is pre-coded to make an instantaneous decision. Depending on the scenario, it will either
+            elect to save the passengers or
+            the pedestrians. You can see that decision displayed
+            at the bottom of the scenario <span style="background-color: red;">in red.</span>
+        </p>
+        <p>
+            Click the "Run Ethical Engine Once" button a few more times to see more random scenarios and the decisions
+            the ethical engine makes.
+
+        </p>
+
+    </section>
+    <section>
+        <h2>II. Write Your Own Engine</h2>
+        <p>Now it's your turn to code the ethical engine!
+        </p>
+        <p>
+            The code you have to modify is the
+            decide() function in the file javascript/engine.js. Write whatever code you like. But make
+            sure that in all cases your function always either returns "passengers"
+            or "pedestrians".
+        </p>
+        <p>
+            Each time you make a modification to the engine, test your modification by clicking
+            the "Run Ethical Engine Once" button. If you've got syntax errors in your code watch for
+            them in the console. If you have
+            logic errors your engine might decide to save passengers when you are really intending to save pedestrians
+            (or vice-versa).  Make modifications/tweaks to your engine based on what you see outputted
+            to the console.
+        </p>
+    </section>
+    <section>
+        <h2>III. Test Your Engine With a Monte Carlo Simulation</h2>
+        <p>Once you're ok with what you've coded it's time to test your code more thoroughly by 
+            running your engine against
+            10,000 automatically created scenarios. (These kinds of tests are sometimes called Monte Carlo simulations.) 
+            To run your test, click the below button:
+
+        </p>
+        <button type="button" id="run-multiple" class="btn btn-primary btn-sm">Run Audit (Runs Ethical Engine 10000
+            times)</button>
+        <p>
+            Notice the output from the simulation. It provides you with a statistical
+            breakdown of what type of people are advantaged (and disadvantaged) by your decision engine.
+            Do the statistics favor the people/animals you wanted to favor? Do they reflect what you think is just
+            and/or equitable? If not, you might want to go back and fine-tune your ethical engine.
+        </p>
+    </section>
+    <section>
+        <h2>IV. Test Your Engine Against Your Intuitions</h2>
+        <p>You might think you've got things figured out pretty well after running your engine against 10,000 random
+            scenarios
+            fine tuning your engine. But how sure are you about that? Most likely there are still differences
+            between what you'd like your decision engine to do and what it really does. To help reveal
+            those differences you are going to manually decide 20 scenarios <span class="emphasize">(part A)</span> and
+            then you'll see whether your
+            decisions are the same as those that your decision engine would make <span class="emphasize">(part
+                B)</span>.
+        </p>
+        <h5>Part A.</h5>
+        <p>First, manually run through 20 random scenarios and decide for yourself who should live and who should die.
+            As you make decisions the program will cache your answers (don't worry, they aren't stored permanently). 
+        </p>
+        <ol>
+            <li>
+        
+                To begin, click this button<button type="button" id="run-manual" class="btn btn-primary btn-sm">Run Manual
+                    Tests</button>
+            </li>
+            <li>
+                <p>Next, read the scenarios in the console and decide whether to save passengers or pedestrians:
+                </p>
+                <p>
+                <button type="button" disabled id="record-entry-passengers" class="btn btn-primary btn-sm">Passengers</button>
+                <button type="button" disabled id="record-entry-pedestrians" class="btn btn-primary btn-sm">Pedestrians</button>
+                <span id="recorded-scenarios"></span>
+                </p>
+            </li>
+        
+            <li><p>Make sure to download a copy of your scenarios/decisions after you've
+                recorded at least 20 of them.</p>
+                <p>
+                    <button type="button" disabled id="download-decisions" class="btn btn-primary btn-sm">Download Decisions</button>
+                </p>
+                
+                
+            </li>
+            <li><p>
+                Once you've recorded and downloaded your decisions you can immediately proceed to <span class="emphasize">(part
+                B)</span>. But if you refresh your browser, you will need to re-upload your saved scenarios/decisions:
+        
+                </p>
+                <p>
+                    <input class="form-control-file" type="file" id="read-file" ><br>
+                </p>
+            </li>
+        </ol>
+
+
+
+        <h5>Part B.</h5>
+        <p>Now that you've recorded your decisions manually, let's see whether they are the same
+            as the ones that your engine would make. To see the differences, click the following button:
+        </p>
+        <button type="button" id="find-differences" class="btn btn-primary btn-sm">Find Differences</button>
+        <p>Examine the differences (if there are any).  In each case ask yourself why the engine made
+            one decision but you made another.  Was it because of a bug in your code? Or because you 
+            hadn't anticipated all the scenarios?  Consider fine-tuning your engine to address the 
+            differences.
+        </p>
+        <p>
+            Note: As an optional additional check you can also reveal biases in your manual decisions by examining who you favored in 
+            aggregate numbers:
+            <button type="button" id="audit-manual-decisions" class="btn btn-primary btn-sm">Audit Manual Decisions</button>
+        
+        </p>
+    </section>
+    <section>
+        <h2>V. Reflect and Write</h2>
+        <p>In this final section you are going to reflect on your experiences. </p>
+        <p>First, confer with a classmate and compare your engines.  Did you code your
+            engines the same way or differently?  What were your differences?
+        </p>
+        <p>Second, consider reading a little more about what philosophers and pundits
+            have to say about designing ethics engines and the Trolley Problem exercise.
+            Quite a few of them are listed on the <a href="https://en.wikipedia.org/wiki/Trolley_problem">trolley problem</a>
+            wikipedia page </p>
+
+        <p>Third, write a two to three page paper where you reflect on your experiences.  Tackle
+            at least three of the following questions: 
+        </p>
+        <blockquote>
+            "What principles of justice/fairness were you 
+            attempting to embody in your decision engine? How well did you succeed in embedding these
+             principles into your engine?  What (if any) compromises did you have to make?  
+             Compare your own engine to one of your classmates -- what were the merits and demerits 
+             of your engine compared to your classmates?  What are some larger lessons about the 
+             relationship between justice/fairness and the development of algorithms that you learned 
+             from doing this assignment? What did you learn in the process of testing and fine-tuning
+             your engine? What are the benefits and costs of attempting to express 
+             justice and fairness through this exercise?  Is it possible to create algorithms that are 
+             neutral?"
+        </blockquote>
+
+    </section>
+    <section>
+        <h2>VI. Turn In Your Work</h2>
+        <p>Deliverables</p>
+        <ul>
+            <li>Your decision algorithm: engine.js</li>
+            <li>A copy of your recorded scenarios and associated decisions: decisions.txt</li>
+            <li>Your two page reflection paper: reflection.doc or reflection.pdf</li>
+        </ul>
+    </section>
+    <section id="appendix">
+        <h2>Appendix</h2>
+        <p>The github repository associated with this web page is <a href="https://github.com/lfernandez55/ethical_engine">here</a>. It is a Javascript fork of
+            Evan Peck's <a href="https://github.com/evanpeck/ethical_engine">ethics engine github repo</a> (which contains Python, C++ and Java versions).
+        </p>
+        <p>
+            My repo also contains code that comes from Justin Li's <a href="https://github.com/justinnhli/blog-stuff/tree/master/2018">ethical engine repo.</a>
+            Li also has a good <a href="https://howtostartacsdept.wordpress.com/2018/01/13/step-86-write-up-the-ethical-engine-lab/">write-up</a> of how he has used the ethics engine in the classroom. (I've integrated much of his approach in my Javascript
+            version). 
+        </p>
+        <p>
+           More reflections on how to incorporate the ethics engine (and other ethics exercises) into the CS curricula can be found here:
+           <div class="csl-bib-body" style="line-height: 1.35; margin-left: 2em; text-indent:-2em;">
+            <div class="csl-entry">Fiesler, Casey, Mikhaila Friske, Natalie Garrett, Felix Muzny, Jessie J. Smith, and Jason Zietz. “Integrating Ethics into Introductory Programming Classes.” In <i>Proceedings of the 52nd ACM Technical Symposium on Computer Science Education</i>, 1027–33. SIGCSE ’21. New York, NY, USA: Association for Computing Machinery, 2021. <a href="https://doi.org/10.1145/3408877.3432510">https://doi.org/10.1145/3408877.3432510</a>.</div>
+            <span class="Z3988" title="url_ver=Z39.88-2004&amp;ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fzotero.org%3A2&amp;rft_id=info%3Adoi%2F10.1145%2F3408877.3432510&amp;rft_id=urn%3Aisbn%3A978-1-4503-8062-1&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=proceeding&amp;rft.atitle=Integrating%20Ethics%20into%20Introductory%20Programming%20Classes&amp;rft.btitle=Proceedings%20of%20the%2052nd%20ACM%20Technical%20Symposium%20on%20Computer%20Science%20Education&amp;rft.place=New%20York%2C%20NY%2C%20USA&amp;rft.publisher=Association%20for%20Computing%20Machinery&amp;rft.series=SIGCSE%20'21&amp;rft.aufirst=Casey&amp;rft.aulast=Fiesler&amp;rft.au=Casey%20Fiesler&amp;rft.au=Mikhaila%20Friske&amp;rft.au=Natalie%20Garrett&amp;rft.au=Felix%20Muzny&amp;rft.au=Jessie%20J.%20Smith&amp;rft.au=Jason%20Zietz&amp;rft.date=2021-03-03&amp;rft.pages=1027%E2%80%931033&amp;rft.spage=1027&amp;rft.epage=1033&amp;rft.isbn=978-1-4503-8062-1"></span>
+          </div>
+        </p>
+        <p>
+           As a note of caution, one should teach this lab with care.  Many criticisms have been raised about the <a href="https://en.wikipedia.org/wiki/Trolley_problem">Trolley Problem on its wikipedia page</a>. Moreover, in an
+           Atlantic article titled <a href="https://www.theatlantic.com/technology/archive/2018/03/got-99-problems-but-a-trolley-aint-one/556805/">Enough With the Trolley Problem</a>, Ian Bogost also criticizes it.   
+           And we should, as Byron Newberry advises in <a href="https://link.springer.com/article/10.1007/s11948-004-0030-8">"The Dilemma of Ethics in Engineering Education"</a>,
+           "resist the tendency to engineerize ethics." All this said, I think this lab can be used successfully
+           as long as students are invited to reflect on its limitations and as long as it is accompanied by other ethics discussions and exercises.
+        </p>
+    </section>
+    
+    <script type="module" src="main.js"></script>
+    <script type="module" src="auditor.js"></script>
+</body>
+
+</html>
