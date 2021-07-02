@@ -1,4 +1,6 @@
-# The Ethical Engine: An Ethical Design Project for CS 1
+_Note: the most updated iteration of the python version of this assignment is now hosted at [https://ethicalcs.github.io/](https://ethicalcs.github.io/)_
+
+# The Ethical Engine: An Ethical Design Project for CS 1 
 **Authors**: [Evan Peck](http://www.eg.bucknell.edu/~emp017/) (Bucknell University), Gabbi LaBorwit (Bucknell University '20)
 
 The Ethical Engine is a python programming project that is designed to engage introductory CS students with ethical design. The scaffolding and rationale behind this project will [can be read at this Medium post](https://medium.com/@evanmpeck/the-ethical-engine-integrating-ethical-design-into-intro-to-computer-science-4f9874e756af).
